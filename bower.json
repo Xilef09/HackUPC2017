@@ -1,0 +1,17 @@
+{
+  "name": "untitled",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "latest",
+    "angular": "latest",
+    "angular-resource": "1.4.8",
+    "angular-cookies": "1.4.8",
+    "angular-route": "1.4.8",
+    "angular-ui-router": "1.4.8",
+    "angular-mocks": "1.4.8",
+    "angular-sanitize": "1.4.8",
+    "moment": "latest",
+    "jquery": "latest"
+  },
+  "exportsOverride": {}
+}
