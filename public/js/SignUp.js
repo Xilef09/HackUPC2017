@@ -2,7 +2,7 @@
  * Created by julian on 4/03/17.
  */
 angular.module('myApp')
-    .controller('SignUpController', ['$scope', '$location', 'signUpService', function ($scope, $location, signUpService) {
+    .controller('SignUpController', ['$scope', '$location', 'signUpService', '$mdDialog', function ($scope, $location, signUpService, $mdDialog) {
         $scope.signUpService = function() {
             $("#register-form").validate({
                 rules: {
@@ -37,10 +37,21 @@ angular.module('myApp')
                     var password = $("#reg_password").val();
                     var email = $("#reg_email").val();
                     var fullname = $("#reg_fullname").val();
-                    var gender = $("#reg_gender").val();
+                    var dialog = $mdDialog;
+                    signUpService.signUpService(username, password, email, fullname).then(function (result) {
+                        if(result == undefined){
+                            var alert = dialog.alert({
+                                title: 'Username Exists',
+                                textContent: 'The username already exists, please sign up with other username',
+                                ok: 'Accept'
+                            });
 
-                    signUpService.signUpService(username, password, email, fullname, gender).then(function () {
-                        console.log("Nada por aqui!")
+                            dialog
+                                .show( alert )
+                                .finally(function() {
+                                    alert = undefined;
+                                });
+                        }
                     });
 
 

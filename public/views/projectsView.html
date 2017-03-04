@@ -5,9 +5,6 @@
 <link href="../styles/logo-nav.css" rel="stylesheet">
 <link href="../styles/project.css" rel="stylesheet">
 <link href="../styles/trello.css" rel="stylesheet">
-<script src="../js/services/Trello.js"></script>
-<script src="../js/services/Taiga.js"></script>
-
 
 
 <!-- Navigation -->
@@ -29,16 +26,22 @@
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a id="getMyBoards" href="#">About</a>
+                    <!-- <a id="getMyBoards" href="#">About</a> -->
+                    <a> Task management</a>
                 </li>
                 <li>
-                    <a id="connectLink" href="#">Sync</a>
+                    <a> Grapichs </a>
+                    <!--<a id="connectLink" href="#">Sync</a> -->
                 </li>
                 <li>
-                    <a id="connectLinkTaiga" href="#">SyncTaiga</a>
+                    <a> Sync with trello </a>
+                    <!-- <a id="getMyCards" href="#">Contact</a> -->
                 </li>
                 <li>
-                    <a id="getMyCards" href="#">Contact</a>
+                    <a> Setting </a>
+                </li>
+                <li>
+                    <a> SignOut </a>
                 </li>
             </ul>
         </div>
@@ -74,12 +77,9 @@
         <p class="lead"> Total hours worked on this project: 36! {{selected}}</p>
         <div class="list-group list-group2">
             <div ng-repeat="task in tareas">
-                <div class="list-group-item">
+                <div class="list-group-item" ng-click="addHours()">
                     {{task}}
-                    <button class="btn-default" style="float: right">
-                        Add hours
-                    </button>
-                    </div>
+                </div>
             </div>
         </div>
 

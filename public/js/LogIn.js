@@ -14,11 +14,12 @@ angular.module('myApp')
             var dialog = $mdDialog;
             //comprobar si los datos son correctos
             checkLogin.checkLogin(user, password).then(function (result) {
-                if(result == undefined){
+                console.log(result);
+                if(result == undefined || result == "Error getting data"){
                     var alert = dialog.alert({
-                        title: 'Bad credentials',
-                        textContent: 'Please stop write with your trunks!',
-                        ok: 'Accept'
+                        title: 'Attention',
+                        textContent: 'Username or password are incorrect!',
+                        ok: 'Close'
                     });
 
                     dialog
@@ -33,6 +34,7 @@ angular.module('myApp')
                 }
             });
         };
+
 
     }]);
 
