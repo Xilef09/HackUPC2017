@@ -32,6 +32,7 @@
     "grunt-cli": "latest",
     "jade": "latest",
     "method-override": "latest",
+    "mongodb": "^2.2.24",
     "mongoose": "latest",
     "morgan": "latest",
     "node-sass-middleware": "latest",

@@ -1,52 +1,147 @@
-'use strict';
+var express     = require('express');
+var extend = require('util')._extend;
+var app         = express();
+var bodyParser  = require('body-parser');
+var morgan      = require('morgan');
+var mongoose    = require('mongoose');
+var passport	= require('passport');
+var config      = require('./config/database'); // get db config file
+var User        = require('./app/models/user'); // get the mongoose model
+var port        = process.env.PORT || 8080;
+var jwt         = require('jwt-simple');
 
-/**
- * Module dependencies.
- */
-var express = require('express'),
-    fs = require('fs');
+// get our request parameters
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-/**
- * Main application entry file.
- * Please note that the order of loading is important.
- */
+// log to console
+app.use(morgan('dev'));
 
-// Initializing system variables
-var config = require('./config/config');
+// Use the passport package in our application
+app.use(passport.initialize());
 
-//Bootstrap models
-var models_path = __dirname + '/app/models';
-var walk = function(path) {
-    fs.readdirSync(path).forEach(function(file) {
-        var newPath = path + '/' + file;
-        var stat = fs.statSync(newPath);
-        if (stat.isFile()) {
-            if (/(.*)\.(js|coffee)/.test(file)) {
-                require(newPath);
-            }
-        } else if (stat.isDirectory()) {
-            walk(newPath);
-        }
-    });
-};
-walk(models_path);
-
-var app = express();
-
-//express settings
-require('./config/express')(app);
-
-//Bootstrap routes
-require('./config/routes')(app);
-
-//Start the app by listening on <port>
-var port = config.port;
-app.listen(port);
-app.on('error',function(e){
-   console.log("Error: " + hostNames[i] + "\n" + e.message); 
-   console.log( e.stack );
+// demo Route (GET http://localhost:8080)
+app.get('/', function(req, res) {
+    res.send('Hello! The API is at http://localhost:' + port + '/api');
 });
-console.log('Express app started on port ' + port);
 
-//expose app
-exports = module.exports = app;
+// Start the server
+app.listen(port);
+console.log('There will be dragons: http://localhost:' + port);
+
+
+
+app.use(function (req, res, next) {
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, skip, limit');
+
+    // Pass to next layer of middleware
+    next();
+});
+
+
+// connect to database
+mongoose.connect(config.database);
+
+// pass passport for configuration
+require('./config/passport')(passport);
+
+// bundle our routes
+var apiRoutes = express.Router();
+
+
+ // create a new user account (POST http://localhost:8080/api/signup)
+ apiRoutes.post('/signup', function(req, res) {
+     console.log(req.body.name + " " + req.body.password);
+    if (!req.body.name || !req.body.password ) {
+        res.json({success: false, msg: 'Please fill in all Data( name, password).'});
+    } else {
+        var newUser = new User({
+            name: req.body.name,
+            password: req.body.password
+        });
+        // save the user
+        newUser.save(function(err) {
+            if (err) {
+                return res.json({success: 301, msg: 'Username, email already exists.'});
+            }
+            res.json({success: 200, msg: 'Successful created new user.'});
+        });
+    }
+ });
+
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, skip, limit");
+    next();
+});
+
+
+// connect the api routes under /api/*
+app.use('/api', apiRoutes);
+
+
+ apiRoutes.post('/authenticate', function(req, res) {
+     User.findOne({
+        name: req.body.name
+     }, function(err, user) {
+        if (err) throw err;
+        if (!user) {
+            res.send({success: false, msg: 'Authentication failed. User not found.'});
+        } else {
+        // check if password matches
+            user.comparePassword(req.body.password, function (err, isMatch) {
+                if (isMatch && !err) {
+                // if user is found and password is right create a token
+                var token = jwt.encode(user, config.secret);
+                // return the information including token as JSON
+                res.json({success: 200, token: 'JWT ' + token});
+                } else {
+                    res.send({success: 401, msg: 'Authentication failed. Wrong password.'});
+                }
+            });
+        }
+     });
+ });
+
+ // route to a restricted info (GET http://localhost:8080/api/memberinfo)
+ apiRoutes.get('/memberinfo', passport.authenticate('jwt', { session: false}), function(req, res) {
+     var token = getToken(req.headers);
+     if (token) {
+         var decoded = jwt.decode(token, config.secret);
+         User.findOne({
+             name: decoded.name
+             }, function(err, user) {
+             if (err) throw err;
+             if (!user) {
+                return res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
+             } else {
+                res.json({success: 200, msg: {"name": user.name}});
+             }
+         });
+     } else {
+        return res.status(403).send({success: false, msg: 'No token provided.'});
+     }
+ });
+
+
+
+getToken = function (headers) {
+    if (headers && headers.authorization) {
+        var parted = headers.authorization.split(' ');
+        if (parted.length === 2) {
+            return parted[1];
+        } else {
+            return null;
+        }
+    } else {
+        return null;
+    }
+};
+
+
+

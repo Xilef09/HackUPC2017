@@ -1,0 +1,29 @@
+body {
+    background-color: #b2dfdb;
+    color: #004d40;
+    text-align: center;
+    margin-top: 40px;
+}
+.list-group2 a{
+    background-color: #e0f2f1 !important;
+    margin-bottom: 20px;
+}
+
+
+.list-group-item2{
+    background-color: #e0f2f1 !important;
+    text-align: left;
+    border-color: #004d40;
+}
+.navbar{
+    background-color: #00695c !important;
+
+}
+nav li a{
+     color:#e0f2f1 !important;
+     font-size: 18px;
+ }
+
+nav li a:hover{
+    color:#000000 !important;
+}
