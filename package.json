@@ -17,6 +17,7 @@
     "test": "node node_modules/grunt-cli/bin/grunt test"
   },
   "dependencies": {
+    "angular-ui-router": "^0.4.2",
     "async": "latest",
     "body-parser": "latest",
     "compression": "latest",
