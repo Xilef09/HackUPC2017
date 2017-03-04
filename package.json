@@ -17,10 +17,12 @@
     "test": "node node_modules/grunt-cli/bin/grunt test"
   },
   "dependencies": {
+    "angular-ui-router": "^0.4.2",
     "async": "latest",
     "body-parser": "latest",
     "compression": "latest",
     "connect-flash": "latest",
+    "connect-mongo": "0.8.2",
     "consolidate": "latest",
     "cookie-parser": "latest",
     "express": "latest",
@@ -30,13 +32,12 @@
     "grunt-cli": "latest",
     "jade": "latest",
     "method-override": "latest",
+    "mongoose": "latest",
     "morgan": "latest",
     "node-sass-middleware": "latest",
     "serve-static": "latest",
     "static-favicon": "latest",
-    "view-helpers": "latest",
-    "mongoose": "latest",
-    "connect-mongo": "0.8.2"
+    "view-helpers": "latest"
   },
   "devDependencies": {
     "grunt-concurrent": "latest",
