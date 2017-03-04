@@ -7,6 +7,7 @@ var mongoose    = require('mongoose');
 var passport	= require('passport');
 var config      = require('./config/database'); // get db config file
 var User        = require('./app/models/user'); // get the mongoose model
+var Project     = require('./app/models/project'); // get the mongoose model
 var port        = process.env.PORT || 8080;
 var jwt         = require('jwt-simple');
 
@@ -61,12 +62,15 @@ var apiRoutes = express.Router();
     } else {
         var newUser = new User({
             name: req.body.name,
-            password: req.body.password
+            password: req.body.password,
+            email: req.body.email,
+            fullname: req.body.fullname,
+            gender: req.body.gender
         });
         // save the user
         newUser.save(function(err) {
             if (err) {
-                return res.json({success: 301, msg: 'Username, email already exists.'});
+                return res.json({success: 301, msg: 'Username already exists.'});
             }
             res.json({success: 200, msg: 'Successful created new user.'});
         });
@@ -85,6 +89,7 @@ app.use(function(req, res, next) {
 app.use('/api', apiRoutes);
 
 
+//User
  apiRoutes.post('/authenticate', function(req, res) {
      User.findOne({
         name: req.body.name
@@ -108,19 +113,18 @@ app.use('/api', apiRoutes);
      });
  });
 
- // route to a restricted info (GET http://localhost:8080/api/memberinfo)
- apiRoutes.get('/memberinfo', passport.authenticate('jwt', { session: false}), function(req, res) {
+ apiRoutes.get('/user', passport.authenticate('jwt', { session: false}), function(req, res) {
      var token = getToken(req.headers);
      if (token) {
          var decoded = jwt.decode(token, config.secret);
          User.findOne({
              name: decoded.name
-             }, function(err, user) {
+             },{_id: 0, __v: 0 , password: 0}, function(err, user) {
              if (err) throw err;
              if (!user) {
                 return res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
              } else {
-                res.json({success: 200, msg: {"name": user.name}});
+                res.json({success: 200, msg: {"user": user}});
              }
          });
      } else {
@@ -142,6 +146,24 @@ getToken = function (headers) {
         return null;
     }
 };
+
+
+//Project
+apiRoutes.post('/project', function(req, res) {
+    var newProject = new Project({
+        projectId: req.body.projectId,
+        projectName: req.body.projectName,
+        time: req.body.time,
+        programRef: req.body.programRef
+    });
+    // save the user
+    newProject.save(function(err) {
+        if (err) {
+            return res.json({success: 301, msg: err});
+        }
+        res.json({success: 200, msg: 'Successful created new user.'});
+    });
+});
 
 
 
