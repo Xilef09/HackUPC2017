@@ -18,7 +18,61 @@ var listaIds = ["570cbaacc078e64c570a1472","57618e68d2d733dd8222c4a4","58a42f721
 
 angular.module('myApp')
     .service('trelloService', [ function () {
+        var trello = {};
+        trello.boards = [];
+        trello.authorize = function () {
+            var onAuthorize = function() {
+                updateLoggedIn();
+                $("#output").empty();
+            };
 
+            Trello.authorize({
+                type: "popup",
+                success: onAuthorize,
+                scope: { write: true, read: true }
+            });
+        };
+        trello.getBoards = function () {
+            updateLoggedIn();
+            $("#result").empty();
+            var data = [];
+
+            Trello.members.get("me", function(member){
+                $("#fullName").text(member.fullName);
+
+                var $boards = $("<div>")
+                    .text("Loading Boards...")
+                    .appendTo("#result");
+
+                // Output a list of all of the cards that the member
+                // is assigned to
+                Trello.get("members/me/boards", function(boards) {
+                    $boards.empty();
+                    $.each(boards, function(ix, board) {
+                        $("<a>")
+                            .attr({href: board.url, target: "trello"})
+                            .addClass("board")
+                            .text(board.name)
+                            .appendTo($boards);
+
+                        data.push({id: board.id , name: board.name});
+                    });
+                });
+                console.log(data);
+                angular.copy(data, trello.boards);
+            });
+        };
+
+        var updateLoggedIn = function() {
+            var isLoggedIn = Trello.authorized();
+            $("#loggedout").toggle(!isLoggedIn);
+            $("#loggedin").toggle(isLoggedIn);
+        };
+
+        return trello;
+
+
+        /*
     $(document).ready(function(){
         var onAuthorize = function() {
             updateLoggedIn();
@@ -125,8 +179,8 @@ angular.module('myApp')
                     type: "popup",
                     success: onAuthorize,
                     scope: { write: true, read: true }
-                })
-                callback()
+                });
+                callback();
             });
         $("#getMyBoards").click(function(){
             console.log("hi");
@@ -137,7 +191,8 @@ angular.module('myApp')
         });
         $("#disconnect").click(logout);
 
-    });
+
+    });*/
     }]);
 
 

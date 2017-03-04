@@ -1,67 +1,13 @@
-<html ng-app= 'myApp'>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>HackUPC2017</title>
-
-
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-
-</head>
-
-<body>
-
-<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
-
-<!-- Trello API -->
-<script src="https://trello.com/1/client.js?key=[key]"></script>
-
-<!-- Angular Material requires Angular.js Libraries -->
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-
-<!-- Angular Material Library -->
-<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-
-<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
-
-
-
-<script src="../js/app.js"></script>
-<script src="../js/LogIn.js"></script>
-<script src="../js/SignUp.js"></script>
-<script src="../js/project.js"></script>
-<script src="../js/services/checkLogin.js"></script>
-<script src="../js/services/signUpService.js"></script>
-<script src="../js/services/restService.js"></script>
-<script src="../js/services/Trello.js"></script>
-<script src="../js/services/getProjects.js"></script>
-<script src="../js/services/putProjects.js"></script>
-
-
-<link href="../styles/login.css" rel="stylesheet">
-<link href="../styles/project.css" rel="stylesheet">
 <div class="container">
-
     <div class="col-md-10">
         <p class="lead">Projects</p>
             <!-- <a href="#" class="list-group-item list-group-item2">Trello Project1</a>
              <a href="#" class="list-group-item list-group-item2">Trello Project2</a>
              <a href="#" class="list-group-item list-group-item2">Jira Project1</a>-->
-            <div class="list-group" ng-controller="project">
+            <div class="list-group">
                 <div ng-repeat="proyecto in listaProj">
-
                     <div class="list-group-item list-group-item2" ng-click="select(proyecto)">
-                        {{proyecto}}
+                        {{proyecto.name}}
                         <input type="checkbox" style="left: 0px; float: right; position: relative" name="favorite1" value="chocolate" />
                     </div>
                 </div>

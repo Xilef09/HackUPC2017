@@ -21,7 +21,9 @@ function config($stateProvider, $urlRouterProvider) {
 
         })
         .state('syncWithTrello' , {
-            url : '/synchWithTrello'
+            url : '/synchWithTrello',
+            templateUrl : "projectsConfirmation.html",
+            controller  : 'projConfirm'
 
 
         });
