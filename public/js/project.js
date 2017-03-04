@@ -3,7 +3,7 @@
  */
 
 angular.module('myApp')
-    .controller('MyCtrl', ['$scope',
+    .controller('project', ['$scope',
 function ($scope) {
     $scope.listaProj = ["Trello 1", "Trello 2", "Jira1"];
     $scope.tareas = {"frontend": "3h","backend": "4h","midendKappa": "7h"};

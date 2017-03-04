@@ -22,7 +22,6 @@ function config($stateProvider, $urlRouterProvider) {
             templateUrl : 'projectsView.html',
             controller  : 'MyCtrl'
 
-
         });
 
 };

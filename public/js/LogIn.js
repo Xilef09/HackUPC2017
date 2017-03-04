@@ -4,11 +4,15 @@
 
 
 angular.module('myApp')
-    .controller('LogInController', ['$scope', function ($scope) {
-        console.log("HI");
+    .controller('LogInController', ['$scope', '$location', function ($scope, $location) {
+        //console.log("HI");
         $scope.checkLogin = function () {
-            console.log("Estoy dentro!");
+            console.log($("#lg_username").val());
+            console.log($("#lg_password").val());
+
             //comprobar si los datos son correctos
+
+            $location.path('project');
 
         };
 
