@@ -4,16 +4,29 @@
 
 
 angular.module('myApp')
-    .controller('LogInController', ['$scope', '$location', 'checkLogin', function ($scope, $location, checkLogin) {
+    .controller('LogInController', ['$scope', '$location', 'checkLogin', '$mdDialog', function ($scope, $location, checkLogin, $mdDialog) {
         console.log("Hi");
+        console.log($mdDialog);
+        $scope.customFullscreen = false;
         $scope.checkLogin = function () {
             var user = $("#lg_username").val();
             var password = ($("#lg_password").val());
-
+            var dialog = $mdDialog;
             //comprobar si los datos son correctos
             checkLogin.checkLogin(user, password).then(function (result) {
                 if(result == undefined){
-                    alert("Bad credentials, please ");
+                    var alert = dialog.alert({
+                        title: 'Attention',
+                        textContent: 'This is an example of how easy dialogs can be!',
+                        ok: 'Close'
+                    });
+
+                    dialog
+                        .show( alert )
+                        .finally(function() {
+                            alert = undefined;
+                        });
+                    //$mdDialog.show("Bad credentials, please stop write with your trunks");
                 }
                 else $location.path('project');
             });
