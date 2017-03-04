@@ -11,6 +11,7 @@
 
 
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
 </head>
 
 <body>
@@ -48,42 +49,26 @@
 
 
 <link href="../styles/login.css" rel="stylesheet">
+<link href="../styles/project.css" rel="stylesheet">
+<div class="container">
 
+    <div class="col-md-10">
+        <p class="lead">Projects</p>
+            <!-- <a href="#" class="list-group-item list-group-item2">Trello Project1</a>
+             <a href="#" class="list-group-item list-group-item2">Trello Project2</a>
+             <a href="#" class="list-group-item list-group-item2">Jira Project1</a>-->
+            <div class="list-group" ng-controller="project">
+                <div ng-repeat="proyecto in listaProj">
 
-<!-- Where all the magic happens -->
-<!-- LOGIN FORM -->
-<div class="text-center">
-    <div class="logo">Login</div>
-    <!-- Main Form -->
-    <div class="login-form-1">
-        <form id="login-form" class="text-center">
-            <div class="login-form-main-message"></div>
-            <div class="main-login-form">
-                <div class="login-group">
-                    <div class="form-group">
-                        <label for="lg_username" class="sr-only">Username</label>
-                        <input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="Username" style="color: #009688">
-                    </div>
-                    <div class="form-group">
-                        <label for="lg_password" class="sr-only">Password</label>
-                        <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="Password" style="color: #009688">
+                    <div class="list-group-item list-group-item2" ng-click="select(proyecto)">
+                        {{proyecto}}
+                        <input type="checkbox" style="left: 0px; float: right; position: relative" name="favorite1" value="chocolate" />
                     </div>
                 </div>
-                <button ng-controller="LogInController" type="submit" class="login-button" ng-click="checkLogin()">
-                <span class="glyphicon glyphicon-menu-right"> </span>
-                </button>
             </div>
-            <div class="etc-login-form text-center">
-                <p>Forgot your password? <a href="#">Click here</a></p>
-                <p>New user? <a ui-sref="signUp">Create new account</a></p>
-            </div>
-        </form>
+        <button>Importar</button>
     </div>
-    <!-- end:Main Form -->
+
 </div>
 
-
-
 </body>
-
-</html>

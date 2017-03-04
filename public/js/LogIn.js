@@ -5,7 +5,8 @@
 
 angular.module('myApp')
     .controller('LogInController', ['$scope', '$location', 'checkLogin', '$mdDialog', function ($scope, $location, checkLogin, $mdDialog) {
-        //console.log($mdDialog);
+        console.log("Hi");
+        console.log($mdDialog);
         $scope.customFullscreen = false;
         $scope.checkLogin = function () {
             var user = $("#lg_username").val();
@@ -28,9 +29,9 @@ angular.module('myApp')
                         });
                 }
                 else {
-
                     //$location.path('../views/projectsView.html');
                     window.location.href = 'projectsView.html'
+                    window.localStorage.setItem("token", result);
                 }
             });
         };

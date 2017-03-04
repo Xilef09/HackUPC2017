@@ -9,7 +9,7 @@ angular.module('myApp')
                 'name' : username,
                 'password' : password,
                 'email' : email,
-                'fullname' : fullname,
+                'fullname' : fullname
             };
 
             return restService.post('/signup', body);
