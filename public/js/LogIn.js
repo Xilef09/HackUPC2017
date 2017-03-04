@@ -26,9 +26,11 @@ angular.module('myApp')
                         .finally(function() {
                             alert = undefined;
                         });
-                    //$mdDialog.show("Bad credentials, please stop write with your trunks");
                 }
-                else $location.path('project');
+                else {
+                    $localStorage.token = result;
+                    $location.path('project');
+                }
             });
         };
 

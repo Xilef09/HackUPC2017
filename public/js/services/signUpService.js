@@ -4,13 +4,14 @@
 
 angular.module('myApp')
     .service('signUpService', ['restService' , function (restService) {
-        this.signUpService = function (username, password) {
+        this.signUpService = function (username, password, email, fullname) {
             var body = {
                 'name' : username,
-                'password' : password
+                'password' : password,
+                'email' : email,
+                'fullname' : fullname,
             };
-            console.log(username);
-            console.log(password);
-            return restService.post('/authenticate', body);
+
+            return restService.post('/signup', body);
         };
     }]);
