@@ -44,7 +44,7 @@
 
     <div class="col-md-3">
         <p class="lead">Projects</p>
-        <div ng-controller="project">
+        <div>
            <!-- <a href="#" class="list-group-item list-group-item2">Trello Project1</a>
             <a href="#" class="list-group-item list-group-item2">Trello Project2</a>
             <a href="#" class="list-group-item list-group-item2">Jira Project1</a>-->
@@ -60,7 +60,7 @@
 
     <div class="col-md-9" ui-view>
         <p class="lead"> Total hours worked on this project: 36! {{selected}}</p>
-        <div ng-controller="MyCtrl" class="list-group list-group2">
+        <div class="list-group list-group2">
             <ul>
                 <a href="#" class="list-group-item" ng-repeat="(task, hours) in tareas">{{task}}: {{hours}}</a>
             </ul>
