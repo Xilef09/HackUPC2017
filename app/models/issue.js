@@ -2,15 +2,18 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 
-var ProjectSchema = new Schema({
-    projectName: {
+var IssueSchema = new Schema({
+    name: {
         type: String,
         required: true
+    },
+    description: {
+        type: String
     },
     time: {
         type: String
     },
-    programRef: {
+    projectName: {
         type: String
     },
     userRef: {
@@ -19,4 +22,4 @@ var ProjectSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('Project', ProjectSchema);
+module.exports = mongoose.model('Issue', IssueSchema);

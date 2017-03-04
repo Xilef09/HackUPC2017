@@ -8,6 +8,7 @@ var passport	= require('passport');
 var config      = require('./config/database'); // get db config file
 var User        = require('./app/models/user'); // get the mongoose model
 var Project     = require('./app/models/project'); // get the mongoose model
+var Issue     = require('./app/models/issue'); // get the mongoose model
 var port        = process.env.PORT || 8080;
 var jwt         = require('jwt-simple');
 
@@ -56,7 +57,6 @@ var apiRoutes = express.Router();
 
  // create a new user account (POST http://localhost:8080/api/signup)
  apiRoutes.post('/signup', function(req, res) {
-     console.log(req.body.name + " " + req.body.password);
     if (!req.body.name || !req.body.password ) {
         res.json({success: false, msg: 'Please fill in all Data( name, password).'});
     } else {
@@ -150,20 +150,163 @@ getToken = function (headers) {
 
 //Project
 apiRoutes.post('/project', function(req, res) {
-    var newProject = new Project({
-        projectId: req.body.projectId,
-        projectName: req.body.projectName,
-        time: req.body.time,
-        programRef: req.body.programRef
-    });
-    // save the user
-    newProject.save(function(err) {
-        if (err) {
-            return res.json({success: 301, msg: err});
-        }
-        res.json({success: 200, msg: 'Successful created new user.'});
-    });
+    var token = getToken(req.headers);
+    if (token) {
+        var decoded = jwt.decode(token, config.secret);
+        User.findOne({
+            name: decoded.name
+        },{_id: 0, __v: 0 , password: 0}, function(err, user) {
+            if (err) throw err;
+            if (!user) {
+                return res.status(403).send({success: false, msg: 'Authentication failed.'});
+            } else {
+                var newProject = new Project({
+                    projectName: req.body.projectName,
+                    time: 0,
+                    programRef: req.body.programRef,
+                    userRef: decoded.name
+                });
+                // save the user
+                newProject.save(function(err) {
+                    if (err) {
+                        return res.json({success: 301, msg: err});
+                    }
+                    res.json({success: 200, msg: 'Successful created new project.'});
+                });
+            }
+        });
+    } else {
+        return res.status(403).send({success: false, msg: 'No token provided.'});
+    }
+});
+
+apiRoutes.get('/project', function(req, res) {
+
+    var token = getToken(req.headers);
+    if (token) {
+        var decoded = jwt.decode(token, config.secret);
+        User.find({
+            name: decoded.name
+        },{_id: 0, __v: 0 , password: 0}, function(err, user) {
+            if (err) throw err;
+            if (!user) {
+                return res.status(403).send({success: false, msg: 'Authentication failed.'});
+            } else {
+                Project.find({ userRef: decoded.name}, {__v: 0}, function (err, projects) {
+                    if (err) throw err;
+                    res.json({success: 200, result: projects});
+                });
+            }
+        });
+    } else {
+        return res.status(403).send({success: false, msg: 'No token provided.'});
+    }
+});
+
+apiRoutes.get('/project/:id', function(req, res) {
+
+    var token = getToken(req.headers);
+    if (token) {
+        var decoded = jwt.decode(token, config.secret);
+        User.findOne({
+            name: decoded.name,
+        },{_id: 0, __v: 0 , password: 0}, function(err, user) {
+            if (err) throw err;
+            if (!user) {
+                return res.status(403).send({success: false, msg: 'Authentication failed.'});
+            } else {
+                Project.find({ userRef: decoded.name, _id: req.params.id}, {__v: 0}, function (err, projects) {
+                    if (err) throw err;
+                    res.json({success: 200, result: projects});
+                });
+            }
+        });
+    } else {
+        return res.status(403).send({success: false, msg: 'No token provided.'});
+    }
+});
+
+apiRoutes.get('/issue/:project', function(req, res) {
+
+    var token = getToken(req.headers);
+    if (token) {
+        var decoded = jwt.decode(token, config.secret);
+        User.find({
+            name: decoded.name
+        },{_id: 0, __v: 0 , password: 0}, function(err, user) {
+            if (err) throw err;
+            if (!user) {
+                return res.status(403).send({success: false, msg: 'Authentication failed.'});
+            } else {
+                Issue.find({ userRef: decoded.name, projectName: req.params.project }, {__v: 0, projectName: 0, userRef: 0}, function (err, projects) {
+                    if (err) throw err;
+                    res.json({success: 200, result: projects});
+                });
+            }
+        });
+    } else {
+        return res.status(403).send({success: false, msg: 'No token provided.'});
+    }
+});
+
+apiRoutes.post('/issue/:id', function(req, res) {
+
+    var token = getToken(req.headers);
+    if (token) {
+        var decoded = jwt.decode(token, config.secret);
+        User.findOne({
+            name: decoded.name,
+        },{_id: 0, __v: 0 , password: 0}, function(err, user) {
+            if (err) throw err;
+            if (!user) {
+                return res.status(403).send({success: false, msg: 'Authentication failed.'});
+            } else {
+                Issue.findOne({ userRef: decoded.name, _id: req.params.id }, {}, function (err, project) {
+                    if (err) throw err;
+                    if(req.body.name) project.set('name', req.body.name);
+                    if(req.body.description) project.set('description', req.body.description);
+                    if(req.body.time) project.set('time', req.body.time);
+                    if(req.body.project) project.set('projectName', req.body.project);
+                    project.save();
+                    res.json({success: 200, msg: 'Successful edited new Issue.'});
+                });
+            }
+        });
+    } else {
+        return res.status(403).send({success: false, msg: 'No token provided.'});
+    }
 });
 
 
+apiRoutes.post('/issue', function(req, res) {
 
+    var token = getToken(req.headers);
+    if (token) {
+        var decoded = jwt.decode(token, config.secret);
+        User.findOne({
+            name: decoded.name,
+        },{_id: 0, __v: 0 , password: 0}, function(err, user) {
+            if (err) throw err;
+            if (!user) {
+                return res.status(403).send({success: false, msg: 'Authentication failed.'});
+            } else {
+                var newIssue= new Issue({
+                    name: req.body.name,
+                    description: req.body.description,
+                    time: req.body.time,
+                    projectName: req.body.project,
+                    userRef: decoded.name
+                });
+                // save the user
+                newIssue.save(function(err) {
+                    if (err) {
+                        return res.json({success: 301, msg: err});
+                    }
+                    res.json({success: 200, msg: 'Successful created new Issue.'});
+                });
+            }
+        });
+    } else {
+        return res.status(403).send({success: false, msg: 'No token provided.'});
+    }
+});
