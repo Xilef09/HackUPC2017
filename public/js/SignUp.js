@@ -3,7 +3,7 @@
  */
 angular.module('myApp')
     .controller('SignUpController', ['$scope', '$location', 'signUpService', function ($scope, $location, signUpService) {
-        console.log("IN");
+        console.log("In");
         $scope.signUpService = function() {
             console.log("IN");
             /*$("#register-form").validate({
