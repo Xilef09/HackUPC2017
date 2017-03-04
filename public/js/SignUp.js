@@ -5,7 +5,7 @@ angular.module('myApp')
     .controller('SignUpController', ['$scope', function ($scope) {
         $scope.sendValues = function() {
 
-            $("#register-form").validate({
+            /*$("#register-form").validate({
                 rules: {
                     reg_username: "required",
                     reg_password: {
@@ -37,7 +37,9 @@ angular.module('myApp')
                     //
                     console.log($("#reg_username").val());
                 }
-            });
+            });*/
+
+
         };
 
     }]);
