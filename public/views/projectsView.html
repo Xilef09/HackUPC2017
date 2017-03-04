@@ -1,9 +1,12 @@
 <body >
 
-
+<script src="https://api.trello.com/1/client.js?key=340f1f431ab553ad0a3a7c7dc725badb"></script>
 <!-- Custom CSS -->
 <link href="../styles/logo-nav.css" rel="stylesheet">
 <link href="../styles/project.css" rel="stylesheet">
+<link href="../styles/trello.css" rel="stylesheet">
+<script src="../js/services/Trello.js"></script>
+
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -24,13 +27,13 @@
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">About</a>
+                    <a id="getMyBoards" href="#">About</a>
                 </li>
                 <li>
-                    <a href="#">Sync</a>
+                    <a id="connectLink" href="#">Sync</a>
                 </li>
                 <li>
-                    <a href="#">Contact</a>
+                    <a id="getMyCards" href="#">Contact</a>
                 </li>
             </ul>
         </div>
