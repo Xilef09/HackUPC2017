@@ -41,6 +41,7 @@
 <script src="../js/SignUp.js"></script>
 <script src="../js/project.js"></script>
 <script src="../js/services/checkLogin.js"></script>
+<script src="../js/services/signUpService.js"></script>
 <script src="../js/services/restService.js"></script>
 
 
@@ -72,7 +73,7 @@
             </div>
             <div class="etc-login-form text-center">
                 <p>Forgot your password? <a href="#">Click here</a></p>
-                <p>New user? <a href="SingUp.html">Create new account</a></p>
+                <p>New user? <a ui-sref="signUp">Create new account</a></p>
             </div>
         </form>
     </div>
@@ -80,7 +81,9 @@
 </div>
 
 <div>
-    <md-button class="md-primary md-raised" ng-click="showAdvanced($event)">Open Dialog</md-button>
+    <md-button class="md-primary md-raised" ng-click="showPrompt($event)"  >
+        Prompt Dialog
+    </md-button>
 </div>
 
 

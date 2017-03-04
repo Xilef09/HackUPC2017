@@ -7,6 +7,7 @@ body {
 .list-group2 div{
     background-color: #e0f2f1 !important;
     margin-bottom: 20px;
+    border-color: #004d40 !important;
 }
 
 
@@ -15,6 +16,12 @@ body {
     text-align: left;
 
     border-color: #004d40 !important;
+}
+.list-group-item2:hover{
+    background-color: #4db6ac !important;
+}
+.list-group-item2:focus{
+    background-color: #26a69a !important;
 }
 .navbar{
     background-color: #00695c !important;
