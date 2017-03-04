@@ -14,7 +14,8 @@ function config($stateProvider, $urlRouterProvider) {
         })
         .state('singUp', {
             url : '/singUp',
-            templateUrl : "SingUp.html"
+            templateUrl : "SingUp.html",
+            controller  : 'SignUpController'
         });
 
 };
