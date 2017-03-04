@@ -9,9 +9,9 @@ angular.module('myApp')
         $scope.checkLogin = function () {
             console.log("Estoy dentro!");
             //comprobar si los datos son correctos
-            
+
         };
-        $scope.saludo = "HOLA";
+
     }]);
 
 

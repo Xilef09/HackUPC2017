@@ -36,7 +36,7 @@
     <div class="logo">Login</div>
     <!-- Main Form -->
     <div class="login-form-1">
-        <form id="login-form" class="text-left">
+        <form id="login-form" class="text-center">
             <div class="login-form-main-message"></div>
             <div class="main-login-form">
                 <div class="login-group">
@@ -49,11 +49,13 @@
                         <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="Password" style="color: #009688">
                     </div>
                 </div>
-                <button ng-controller="LogInController" type="submit" class="login-button" ng-click="checkLogin()"> {{saludo}}</button>
+                <button ng-controller="LogInController" type="submit" class="login-button" ng-click="checkLogin()">
+                <span class="glyphicon glyphicon-menu-right"> </span>
+                </button>
             </div>
             <div class="etc-login-form text-center">
                 <p>Forgot your password? <a href="#">Click here</a></p>
-                <p>New user? <a ui-sref="singUp">Create new account</a></p>
+                <p>New user? <a href="SingUp.html">Create new account</a></p>
             </div>
         </form>
     </div>
