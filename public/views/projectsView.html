@@ -48,19 +48,25 @@
            <!-- <a href="#" class="list-group-item list-group-item2">Trello Project1</a>
             <a href="#" class="list-group-item list-group-item2">Trello Project2</a>
             <a href="#" class="list-group-item list-group-item2">Jira Project1</a>-->
-            <ul>
-                <a href="#" class="list-group-item list-group-item2" ng-repeat="x in listaProj">{{x}}</a>
-            </ul>
+            <div class="list-group">
+                <div ng-repeat="proyecto in listaProj">
+                    <button class="list-group-item list-group-item2" ng-click="select(proyecto)">
+                        {{proyecto}}
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="col-md-9">
-        <p class="lead">Total hours worked on this project: 36!</p>
-        <div class="list-group list-group2">
-
-            <a href="#" class="list-group-item">Task 1</a>
+    <div class="col-md-9" ui-view>
+        <p class="lead"> Total hours worked on this project: 36! {{selected}}</p>
+        <div ng-controller="MyCtrl" class="list-group list-group2">
+            <ul>
+                <a href="#" class="list-group-item" ng-repeat="(task, hours) in tareas">{{task}}: {{hours}}</a>
+            </ul>
+            <!--<a href="#" class="list-group-item">Task 1</a>
             <a href="#" class="list-group-item">Task 2</a>
-            <a href="#" class="list-group-item">Task 3</a>
+            <a href="#" class="list-group-item">Task 3</a>-->
         </div>
     </div>
 </div>
