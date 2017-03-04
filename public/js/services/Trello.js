@@ -42,6 +42,32 @@ $(document).ready(function(){
         });
 
     };
+    var getBoards = function(){
+        updateLoggedIn();
+        $("#result").empty();
+
+        Trello.members.get("me", function(member){
+            $("#fullName").text(member.fullName);
+
+            var $boards = $("<div>")
+                .text("Loading Cards...")
+                .appendTo("#result");
+
+            // Output a list of all of the cards that the member
+            // is assigned to
+            Trello.get("members/me/boards", function(boards) {
+                $boards.empty();
+                $.each(boards, function(ix, board) {
+                    $("<a>")
+                        .attr({href: board.url, target: "trello"})
+                        .addClass("board")
+                        .text(board.name)
+                        .appendTo($boards);
+                    console.log(board.name);
+                });
+            });
+        });
+    }
 
     var updateLoggedIn = function() {
         var isLoggedIn = Trello.authorized();
@@ -67,7 +93,9 @@ $(document).ready(function(){
                 scope: { write: true, read: true }
             })
         });
-
+    $("#getMyBoards").click(function(){
+            getBoards();
+    });
     $("#disconnect").click(logout);
 
 });
