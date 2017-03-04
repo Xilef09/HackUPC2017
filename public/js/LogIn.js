@@ -4,7 +4,7 @@
 
 
 angular.module('myApp')
-    .controller('LogInController', ['$scope', '$location', 'checkLogin', '$mdDialog', '$localStorage', function ($scope, $location, checkLogin, $mdDialog, $localStorage) {
+    .controller('LogInController', ['$scope', '$location', 'checkLogin', '$mdDialog', function ($scope, $location, checkLogin, $mdDialog) {
         console.log("Hi");
         console.log($mdDialog);
         $scope.customFullscreen = false;
@@ -28,7 +28,7 @@ angular.module('myApp')
                         });
                 }
                 else {
-                    $localStorage.token = result;
+
                     $location.path('project');
                 }
             });
