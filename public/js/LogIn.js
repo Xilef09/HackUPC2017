@@ -4,67 +4,35 @@
 
 
 angular.module('myApp')
-    .controller('LogInController', ['$scope', '$location', '$mdDialog', 'checkLogin' , function ($scope, $location, $mdDialog, checkLogin) {
-
+    .controller('LogInController', ['$scope', '$location', 'checkLogin', '$mdDialog', function ($scope, $location, checkLogin, $mdDialog) {
+        //console.log($mdDialog);
+        $scope.customFullscreen = false;
         $scope.checkLogin = function () {
             var user = $("#lg_username").val();
             var password = ($("#lg_password").val());
-
+            var dialog = $mdDialog;
             //comprobar si los datos son correctos
             checkLogin.checkLogin(user, password).then(function (result) {
-                if(result == undefined){
-                    alert("Bad credentials, please ");
+                console.log(result);
+                if(result == undefined || result == "Error getting data"){
+                    var alert = dialog.alert({
+                        title: 'Attention',
+                        textContent: 'Username or password are incorrect!',
+                        ok: 'Close'
+                    });
+
+                    dialog
+                        .show( alert )
+                        .finally(function() {
+                            alert = undefined;
+                        });
+                    //$mdDialog.show("Bad credentials, please stop write with your trunks");
                 }
                 else $location.path('project');
             });
         };
 
-        $scope.items = [1, 2, 3];
-        var dialog = $mdDialog;
 
-        $scope.showPrompt = function(ev) {
-            // Appending dialog to document.body to cover sidenav in docs app
-            var parentEl = angular.element(document.body);
-
-            dialog.show({
-                parent: parentEl,
-                targetEvent: $event,
-                template:
-                '<md-dialog aria-label="List dialog">' +
-                '  <md-dialog-content>'+
-                '    <md-list>'+
-                '      <md-list-item ng-repeat="item in items">'+
-                '       <p>Number {{item}}</p>' +
-                '      '+
-                '    </md-list-item></md-list>'+
-                '  </md-dialog-content>' +
-                '  <md-dialog-actions>' +
-                '    <md-button ng-click="closeDialog()" class="md-primary">' +
-                '      Close Dialog' +
-                '    </md-button>' +
-                '  </md-dialog-actions>' +
-                '</md-dialog>',
-                locals: {
-                    items: $scope.items
-                },
-                controller: DialogController
-            });
-        };
-
-        function DialogController($scope, $mdDialog) {
-            $scope.items = items;
-            $scope.hide = function() {
-                $mdDialog.hide();
-            };
-
-            $scope.cancel = function() {
-                $mdDialog.cancel();
-            };
-
-            $scope.answer = function(answer) {
-                $mdDialog.hide(answer);
-            };
-        }
     }]);
 
 

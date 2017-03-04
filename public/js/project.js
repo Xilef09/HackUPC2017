@@ -3,12 +3,13 @@
  */
 
 angular.module('myApp')
-    .controller('project', ['$scope',
-function ($scope) {
+    .controller('project', ['$scope', '$mdDialog', function ($scope, $mdDialog) {
     $scope.listaProj = ["Trello 1", "Trello 2", "Jira1"];
     var taskProj1 = ['a', 'b', 'c'];
     var taskProj2 = ['a', 'b', 'c', 'd'];
     var taskProj3 = ['a'];
+
+        $scope.status = '';
 
     $scope.tareas = {"frontend": "3h","backend": "4h","midendKappa": "7h"};
 
@@ -22,4 +23,27 @@ function ($scope) {
 
         $scope.selected = proyecto;
     };
+
+    $scope.addHours = function () {
+        console.log("HI");
+        var hours;
+        $scope.customFullscreen = false;
+        var dialog = $mdDialog;
+        var confirm = dialog.prompt({
+            title: 'Add/Modify hours to this task',
+            textContent: 'Write the number of hours for this task',
+            ok: 'Save',
+            cancel: 'Discard'
+        });
+
+        dialog
+            .show(confirm).then(function (result) {
+                $scope.status =  result;
+                console.log($scope.status);
+            })
+            .finally(function() {
+                alert = undefined;
+            });
+
+    }
 }]);
