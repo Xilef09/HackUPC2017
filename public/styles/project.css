@@ -13,7 +13,7 @@ body {
 .list-group-item2{
     background-color: #e0f2f1 !important;
     text-align: left;
-    border-color: #004d40;
+    border-color: #004d40 !important;
 }
 .navbar{
     background-color: #00695c !important;
