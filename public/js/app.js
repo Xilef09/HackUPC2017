@@ -11,21 +11,20 @@ function config($stateProvider, $urlRouterProvider) {
 
 
     $stateProvider
-        .state('login', {
-            url : '/login',
-            templateUrl : 'index.html',
-            controller  : 'LogInController'
-        })
-        .state('signUp', {
-            url : '/signUp',
-            templateUrl : "SignUp.html",
-            controller  : 'SignUpController'
-        })
-        .state('project', {
-            url : '/project',
-            templateUrl : 'projectsView.html',
+        .state('mainView' , {
+            url : '/mainView',
+            templateUrl : "taskManagement.html",
             controller  : 'project'
+        })
+        .state('graphics' , {
+            url : '/graphics'
+
+        })
+        .state('syncWithTrello' , {
+            url : '/synchWithTrello'
+
 
         });
+
 
 };

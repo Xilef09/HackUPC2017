@@ -1,0 +1,35 @@
+
+<!-- Page Content -->
+<div class="customcontainer">
+
+    <div class="col-md-3">
+        <p class="lead">Projects</p>
+        <div>
+            <!-- <a href="#" class="list-group-item list-group-item2">Trello Project1</a>
+             <a href="#" class="list-group-item list-group-item2">Trello Project2</a>
+             <a href="#" class="list-group-item list-group-item2">Jira Project1</a>-->
+            <div class="list-group">
+                <div ng-repeat="proyecto in listaProj">
+                    <button class="list-group-item list-group-item2" ng-click="select(proyecto)">
+                        {{proyecto}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  class="col-md-1">
+
+    </div>
+    <div class="col-md-7">
+        <p class="lead"> Total hours worked on this project: 36! {{selected}}</p>
+        <div class="list-group list-group2">
+            <div ng-repeat="task in tareas">
+                <div class="list-group-item" ng-click="addHours()">
+                    {{task}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

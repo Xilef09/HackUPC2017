@@ -129,6 +129,7 @@ angular.module('myApp')
                 callback()
             });
         $("#getMyBoards").click(function(){
+            console.log("hi");
                 getBoards();
         });
         $("#getMyCards").click(function(){

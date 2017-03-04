@@ -28,8 +28,9 @@ angular.module('myApp')
                         });
                 }
                 else {
-                    $localStorage.token = result;
-                    $location.path('project');
+
+                    //$location.path('../views/projectsView.html');
+                    window.location.href = 'projectsView.html'
                 }
             });
         };

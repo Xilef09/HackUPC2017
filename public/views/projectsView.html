@@ -1,6 +1,57 @@
-<body >
+<html ng-app= 'myApp'>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>HackUPC2017</title>
+
+
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+</head>
+
+<body>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+
+<!-- Trello API -->
+<script src="https://trello.com/1/client.js?key=[key]"></script>
+
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
+
+
+
+<script src="../js/app.js"></script>
+<script src="../js/LogIn.js"></script>
+<script src="../js/SignUp.js"></script>
+<script src="../js/project.js"></script>
+<script src="../js/services/checkLogin.js"></script>
+<script src="../js/services/signUpService.js"></script>
+<script src="../js/services/restService.js"></script>
+<script src="../js/services/Trello.js"></script>
+<script src="../js/services/getProjects.js"></script>
+<script src="../js/services/putProjects.js"></script>
+
+
+<link href="../styles/login.css" rel="stylesheet">
 
 <script src="https://api.trello.com/1/client.js?key=340f1f431ab553ad0a3a7c7dc725badb"></script>
+
 <!-- Custom CSS -->
 <link href="../styles/logo-nav.css" rel="stylesheet">
 <link href="../styles/project.css" rel="stylesheet">
@@ -19,7 +70,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">
-                <img src="http://placehold.it/150x50&text=Logo" alt=  "">
+
             </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -27,21 +78,18 @@
             <ul class="nav navbar-nav">
                 <li>
                     <!-- <a id="getMyBoards" href="#">About</a> -->
-                    <a> Task management</a>
+                    <a ui-sref="mainView"> Task management</a>
                 </li>
                 <li>
-                    <a> Grapichs </a>
+                    <a ui-sref="graphics"> Grapichs </a>
                     <!--<a id="connectLink" href="#">Sync</a> -->
                 </li>
                 <li>
-                    <a> Sync with trello </a>
+                    <a id="connectLink" ui-sref="syncWithTrello"> Sync with trello </a>
                     <!-- <a id="getMyCards" href="#">Contact</a> -->
                 </li>
                 <li>
-                    <a> Setting </a>
-                </li>
-                <li>
-                    <a> SignOut </a>
+                    <a href="index.html"> SignOut </a>
                 </li>
             </ul>
         </div>
@@ -50,41 +98,11 @@
     <!-- /.container -->
 </nav>
 
-<!-- Page Content -->
-<div class="customcontainer">
+<div ui-view>
 
-    <div class="col-md-3">
-        <p class="lead">Projects</p>
-        <div>
-           <!-- <a href="#" class="list-group-item list-group-item2">Trello Project1</a>
-            <a href="#" class="list-group-item list-group-item2">Trello Project2</a>
-            <a href="#" class="list-group-item list-group-item2">Jira Project1</a>-->
-            <div class="list-group">
-                <div ng-repeat="proyecto in listaProj">
-                    <button class="list-group-item list-group-item2" ng-click="select(proyecto)">
-                        {{proyecto}}
-
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div  class="col-md-1">
-
-    </div>
-    <div class="col-md-7">
-        <p class="lead"> Total hours worked on this project: 36! {{selected}}</p>
-        <div class="list-group list-group2">
-            <div ng-repeat="task in tareas">
-                <div class="list-group-item" ng-click="addHours()">
-                    {{task}}
-                </div>
-            </div>
-        </div>
-
-    </div>
 </div>
 
 </body>
+
+</html>
 
