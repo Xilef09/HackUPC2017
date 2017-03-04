@@ -29,6 +29,11 @@
 
 <body>
 
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+
+<script src="../js/project.js"></script>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -68,16 +73,20 @@
 
     <div class="col-md-3">
         <p class="lead">Projects</p>
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item2">Trello Project1</a>
+        <div ng-app ng-controller="MyCtrl">
+           <!-- <a href="#" class="list-group-item list-group-item2">Trello Project1</a>
             <a href="#" class="list-group-item list-group-item2">Trello Project2</a>
-            <a href="#" class="list-group-item list-group-item2">Jira Project1</a>
+            <a href="#" class="list-group-item list-group-item2">Jira Project1</a>-->
+            <ul>
+                <li ng-repeat="(number,name) in items">{{name}}</li>
+            </ul>
         </div>
     </div>
 
     <div class="col-md-9">
         <p class="lead">Total hours worked on this project: 36!</p>
         <div class="list-group list-group2">
+
             <a href="#" class="list-group-item">Task 1</a>
             <a href="#" class="list-group-item">Task 2</a>
             <a href="#" class="list-group-item">Task 3</a>
