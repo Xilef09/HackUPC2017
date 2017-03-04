@@ -11,8 +11,6 @@ angular.module('myApp')
                 'name' : username,
                 'password' : password
             };
-            console.log(username);
-            console.log(password);
             return restService.post('/authenticate', body);
         };
     }]);

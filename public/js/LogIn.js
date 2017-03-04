@@ -11,12 +11,12 @@ angular.module('myApp')
             var password = ($("#lg_password").val());
 
             //comprobar si los datos son correctos
-            checkLogin.checkLogin(user, password).then(function () {
-                console.log("Nada por aqui!")
+            checkLogin.checkLogin(user, password).then(function (result) {
+                if(result == undefined){
+                    alert("Bad credentials, please ");
+                }
+                else $location.path('project');
             });
-
-            //$location.path('project');
-
         };
 
     }]);

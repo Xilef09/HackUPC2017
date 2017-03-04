@@ -25,20 +25,16 @@ angular.module('myApp')
                 .then(function successCallback(response) {
                     console.log(response);
                     if(response['data']['msg'] != undefined) {
-                        console.log(response['data']['msg']);
                         return response['data']['msg']['data'];
                     }
                     else if (response['data']['token'] != undefined){
-                        console.log(response['data']['token']);
                         return response['data']['token'];
                     }
                     else {
-                        console.log(response['data']['result']['data']);
                         return response['data']['result']['data'];
                     }
 
                 }, function errorCallback(response) {
-                    console.log(response);
                     return "Error getting data";
                 });
         }
