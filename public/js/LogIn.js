@@ -4,42 +4,23 @@
 
 
 angular.module('myApp')
-    .controller('LogInController', ['$scope', '$location' , function ($scope, $location) {
-        console.log("HI1");
+    .controller('LogInController', ['$scope', '$location', 'checkLogin', function ($scope, $location, checkLogin) {
+        console.log("Hi");
         $scope.checkLogin = function () {
-            var body = {body: {
-                user: $("#lg_username").val(),
-                password: ($("#lg_password").val())
-            } }
-            /*return restService.get('/authenticate', body).then(function (data) {
-                console.log(data);
-            });*/
+            var user = $("#lg_username").val();
+            var password = ($("#lg_password").val());
+
             //comprobar si los datos son correctos
-
-            $location.path('project');
-
-        };
-
-    }]);
-
-angular.module('myApp')
-    .service('LogInController', ['restService', 'MY_CONSTANTS' , function (restService, MY_CONSTANTS) {
-        console.log("HI2");
-        $scope.checkLogin = function () {
-            var body = {body: {
-                user: $("#lg_username").val(),
-                password: ($("#lg_password").val())
-            } }
-            return restService.get('/authenticate', body).then(function (data) {
-                console.log(data);
+            checkLogin.checkLogin(user, password).then(function () {
+                console.log("Nada por aqui!")
             });
-            //comprobar si los datos son correctos
 
-            $location.path('project');
+            //$location.path('project');
 
         };
 
     }]);
+
 
 
 /*

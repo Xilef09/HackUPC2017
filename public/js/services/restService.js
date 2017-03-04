@@ -20,10 +20,13 @@ angular.module('myApp')
                 });
         };
         this.post = function (url, data) {
+            console.log(data);
             return $http.post(MY_CONSTANTS.SERVER_IP + url, data)
                 .then(function successCallback(response) {
+                    console.log(response);
                     return response['data']['msg']['data'];
                 }, function errorCallback(response) {
+
                     return "Error getting data";
                 });
         }

@@ -9,6 +9,9 @@
 
     <title>HackUPC2017</title>
 
+
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
 </head>
 
 <body>
@@ -17,19 +20,28 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
 
-<script data-require="angular.js@1.2.10" data-semver="1.2.10" src="http://code.angularjs.org/1.2.10/angular.min.js"></script>
-<script data-require="angular-animate@1.2.11" data-semver="1.2.11" src="http://code.angularjs.org/1.2.11/angular-animate.min.js"></script>
-<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
-
 <!-- Trello API -->
 <script src="https://trello.com/1/client.js?key=[key]"></script>
+
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
+
+
 
 <script src="../js/app.js"></script>
 <script src="../js/LogIn.js"></script>
 <script src="../js/SignUp.js"></script>
 <script src="../js/project.js"></script>
-
-
+<script src="../js/services/checkLogin.js"></script>
+<script src="../js/services/restService.js"></script>
 
 
 <link href="../styles/login.css" rel="stylesheet">
@@ -67,6 +79,9 @@
     <!-- end:Main Form -->
 </div>
 
+<div>
+    <md-button class="md-primary md-raised" ng-click="showAdvanced($event)">Open Dialog</md-button>
+</div>
 
 
 </body>
