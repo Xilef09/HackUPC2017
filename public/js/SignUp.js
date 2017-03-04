@@ -2,10 +2,11 @@
  * Created by julian on 4/03/17.
  */
 angular.module('myApp')
-    .controller('SignUpController', ['$scope', function ($scope) {
-        $scope.sendValues = function() {
-
-            $("#register-form").validate({
+    .controller('SignUpController', ['$scope', '$location', 'signUpService', function ($scope, $location, signUpService) {
+        console.log("IN");
+        $scope.signUpService = function() {
+            console.log("IN");
+            /*$("#register-form").validate({
                 rules: {
                     reg_username: "required",
                     reg_password: {
@@ -34,10 +35,18 @@ angular.module('myApp')
                 },
                 submitHandler: function(form) {
                     // DataBase TODO
-                    //
-                    console.log($("#reg_username").val());
+                    var username = $("#reg_username").val();
+                    var password = $("#reg_password").val();
+
+                    signupService.signupService(username, password).then(function () {
+                        console.log("Nada por aqui!")
+                    });
+
+
                 }
-            });
+            });*/
+
+
         };
 
     }]);
