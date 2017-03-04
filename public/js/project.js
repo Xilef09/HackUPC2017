@@ -10,6 +10,7 @@ function ($scope) {
     var taskProj2 = ['a', 'b', 'c', 'd'];
     var taskProj3 = ['a'];
 
+    console.log(window.localStorage.getItem("token"));
     $scope.tareas = {"frontend": "3h","backend": "4h","midendKappa": "7h"};
 
     $scope.select = function(proyecto){
