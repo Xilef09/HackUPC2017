@@ -1,0 +1,10 @@
+@import url("//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css");
+@import url("login.css");
+
+body {
+    font-size: 16px;
+}
+
+.form-control2 {
+    font-size: 20px !important;
+}
