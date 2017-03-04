@@ -20,7 +20,7 @@ function config($stateProvider, $urlRouterProvider) {
         .state('project', {
             url : '/project',
             templateUrl : 'projectsView.html',
-            controller  : 'MyCtrl'
+            controller  : 'project'
 
         });
 

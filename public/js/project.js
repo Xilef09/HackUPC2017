@@ -10,6 +10,7 @@ function ($scope) {
 
     $scope.select = function(proyecto){
         $scope.tareas = ["Trello 2", "Trello 1", "Jira3"];
+        $scope.selected = proyecto;
 
     };
 
