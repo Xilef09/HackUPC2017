@@ -16,9 +16,9 @@ angular.module('myApp')
             checkLogin.checkLogin(user, password).then(function (result) {
                 if(result == undefined){
                     var alert = dialog.alert({
-                        title: 'Attention',
-                        textContent: 'This is an example of how easy dialogs can be!',
-                        ok: 'Close'
+                        title: 'Bad credentials',
+                        textContent: 'Please stop write with your trunks!',
+                        ok: 'Accept'
                     });
 
                     dialog
@@ -26,7 +26,6 @@ angular.module('myApp')
                         .finally(function() {
                             alert = undefined;
                         });
-                    //$mdDialog.show("Bad credentials, please stop write with your trunks");
                 }
                 else $location.path('project');
             });
