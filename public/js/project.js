@@ -3,10 +3,14 @@
  */
 
 angular.module('myApp')
-    .controller('project', ['$scope', function ($scope) {
+    .controller('project', ['$scope',
+function ($scope) {
+    $scope.listaProj = ["Trello 1", "Trello 2", "Jira1"];
+    $scope.tareas = {"frontend": "3h","backend": "4h","midendKappa": "7h"};
 
-        $scope.listaProj = ["Trello 1", "Trello 2", "Jira1"];
-        $scope.tareas = ["frontend","backend","midendKappa"];
+    $scope.select = function(proyecto){
+        $scope.tareas = ["Trello 2", "Trello 1", "Jira3"];
+        $scope.selected = proyecto;
 
-        
+    };
 }]);
