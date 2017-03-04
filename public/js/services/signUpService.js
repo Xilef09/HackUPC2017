@@ -12,6 +12,7 @@ angular.module('myApp')
                 'fullname' : fullname,
                 'gender' : gender
             };
+
             return restService.post('/signup', body);
         };
     }]);
