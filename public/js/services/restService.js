@@ -20,10 +20,8 @@ angular.module('myApp')
                 });
         };
         this.post = function (url, data) {
-            console.log(data);
             return $http.post(MY_CONSTANTS.SERVER_IP + url, data)
                 .then(function successCallback(response) {
-                    console.log(response);
                     if(response['data']['msg'] != undefined) {
                         return response['data']['msg']['data'];
                     }
@@ -36,6 +34,7 @@ angular.module('myApp')
 
                 }, function errorCallback(response) {
                     return "Error getting data";
+
                 });
         }
     }]);

@@ -58,6 +58,8 @@ angular.module('myApp')
     var taskProj2 = ['a', 'b', 'c', 'd'];
     var taskProj3 = ['a'];
 
+    console.log(window.localStorage.getItem("token"));
+        $scope.status = '';
     $scope.tareas = {"frontend": "3h","backend": "4h","midendKappa": "7h"};
 
     $scope.select = function(proyecto){
@@ -70,4 +72,27 @@ angular.module('myApp')
 
         $scope.selected = proyecto;
     };
+
+    $scope.addHours = function () {
+        console.log("HI");
+        var hours;
+        $scope.customFullscreen = false;
+        var dialog = $mdDialog;
+        var confirm = dialog.prompt({
+            title: 'Add/Modify hours to this task',
+            textContent: 'Write the number of hours for this task',
+            ok: 'Save',
+            cancel: 'Discard'
+        });
+
+        dialog
+            .show(confirm).then(function (result) {
+                $scope.status =  result;
+                console.log($scope.status);
+            })
+            .finally(function() {
+                alert = undefined;
+            });
+
+    }
 }]);
