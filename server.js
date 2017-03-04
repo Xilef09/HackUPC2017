@@ -284,7 +284,7 @@ apiRoutes.post('/issue', function(req, res) {
     if (token) {
         var decoded = jwt.decode(token, config.secret);
         User.findOne({
-            name: decoded.name,
+            name: decoded.name
         },{_id: 0, __v: 0 , password: 0}, function(err, user) {
             if (err) throw err;
             if (!user) {
