@@ -24,9 +24,21 @@ angular.module('myApp')
             return $http.post(MY_CONSTANTS.SERVER_IP + url, data)
                 .then(function successCallback(response) {
                     console.log(response);
-                    return response['data']['msg']['data'];
-                }, function errorCallback(response) {
+                    if(response['data']['msg'] != undefined) {
+                        console.log(response['data']['msg']);
+                        return response['data']['msg']['data'];
+                    }
+                    else if (response['data']['token'] != undefined){
+                        console.log(response['data']['token']);
+                        return response['data']['token'];
+                    }
+                    else {
+                        console.log(response['data']['result']['data']);
+                        return response['data']['result']['data'];
+                    }
 
+                }, function errorCallback(response) {
+                    console.log(response);
                     return "Error getting data";
                 });
         }
