@@ -3,10 +3,8 @@
  */
 angular.module('myApp')
     .controller('SignUpController', ['$scope', '$location', 'signUpService', function ($scope, $location, signUpService) {
-        console.log("In");
         $scope.signUpService = function() {
-            console.log("IN");
-            /*$("#register-form").validate({
+            $("#register-form").validate({
                 rules: {
                     reg_username: "required",
                     reg_password: {
@@ -37,16 +35,17 @@ angular.module('myApp')
                     // DataBase TODO
                     var username = $("#reg_username").val();
                     var password = $("#reg_password").val();
+                    var email = $("#reg_email").val();
+                    var fullname = $("#reg_fullname").val();
+                    var gender = $("#reg_gender").val();
 
-                    signupService.signupService(username, password).then(function () {
+                    signUpService.signUpService(username, password, email, fullname, gender).then(function () {
                         console.log("Nada por aqui!")
                     });
 
 
                 }
-            });*/
-
-
+            });
         };
 
     }]);
