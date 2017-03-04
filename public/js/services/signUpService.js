@@ -3,12 +3,12 @@
  */
 
 angular.module('myApp')
-    .service('signupService', ['restService' , function (restService) {
-        this.signupService = function (username, password) {
-            var body = {body: {
+    .service('signUpService', ['restService' , function (restService) {
+        this.signUpService = function (username, password) {
+            var body = {
                 'name' : username,
                 'password' : password
-            } };
+            };
             console.log(username);
             console.log(password);
             return restService.post('/authenticate', body);

@@ -16,9 +16,9 @@ function config($stateProvider, $urlRouterProvider) {
             templateUrl : 'index.html',
             controller  : 'LogInController'
         })
-        .state('singUp', {
-            url : '/singUp',
-            templateUrl : "SingUp.html",
+        .state('signUp', {
+            url : '/signUp',
+            templateUrl : "SignUp.html",
             controller  : 'SignUpController'
         })
         .state('project', {
