@@ -15,6 +15,11 @@ function config($stateProvider, $urlRouterProvider) {
         .state('singUp', {
             url : '/singUp',
             templateUrl : "SingUp.html"
+        })
+        .state('project', {
+            url : '/project',
+            templateUrl : 'projectsView.html',
+            controller  : 'project'
         });
 
 };
