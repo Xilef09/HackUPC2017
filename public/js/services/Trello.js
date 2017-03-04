@@ -12,7 +12,9 @@
 
  The &dummy=.js part of the managed resource URL is required per http://doc.jsfiddle.net/basic/introduction.html#add-resources
  */
-
+var listaIds = ["570cbaacc078e64c570a1472","57618e68d2d733dd8222c4a4","58a42f721c2f91cb34bbf2bd",
+    "564f10f2f7a8185aafc212ce", "58b9e719a25e7f60c7736b4c","56cc43989e478436ea725caf","564f11073921da5774e711b2",
+    "56e7f2cdf3e99b15febe5c3a" ];
 
 $(document).ready(function(){
 
@@ -50,7 +52,7 @@ $(document).ready(function(){
             $("#fullName").text(member.fullName);
 
             var $boards = $("<div>")
-                .text("Loading Cards...")
+                .text("Loading Boards...")
                 .appendTo("#result");
 
             // Output a list of all of the cards that the member
@@ -63,7 +65,36 @@ $(document).ready(function(){
                         .addClass("board")
                         .text(board.name)
                         .appendTo($boards);
-                    console.log(board.name);
+                    console.log(board.id);
+
+                });
+            });
+        });
+    }
+
+    var getCardsOfBoard = function(){
+        updateLoggedIn();
+        $("#result2").empty();
+
+        Trello.members.get("me", function(member){
+            $("#fullName").text(member.fullName);
+
+            var $cards = $("<div>")
+                .text("Loading Cards...")
+                .appendTo("#result2");
+
+            // Output a list of all of the cards that the member
+            // is assigned to
+            Trello.get("boards/" + listaIds[3] + "/cards", function(cards) {
+                $cards.empty();
+                $.each(cards, function(ix, card) {
+                    $("<a>")
+                        .attr({href: card.url, target: "trello"})
+                        .addClass("card")
+                        .text(card.name)
+                        .appendTo($cards);
+                    console.log(card.name);
+
                 });
             });
         });
@@ -95,6 +126,9 @@ $(document).ready(function(){
         });
     $("#getMyBoards").click(function(){
             getBoards();
+    });
+    $("#getMyCards").click(function(){
+        getCardsOfBoard();
     });
     $("#disconnect").click(logout);
 
