@@ -1,6 +1,21 @@
 /**
  * Created by sinnombre on 4/03/17.
  */
+
+
+angular.module('myApp')
+    .controller('LogInController', ['$scope', function ($scope) {
+        console.log("HI");
+        $scope.checkLogin = function () {
+            console.log("Estoy dentro!");
+            //comprobar si los datos son correctos
+
+        };
+
+    }]);
+
+
+/*
 (function($) {
     "use strict";
 
@@ -157,3 +172,5 @@
     }
 
 })(jQuery);
+
+    */

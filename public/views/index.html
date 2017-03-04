@@ -23,13 +23,14 @@
 <script data-require="angular-animate@1.2.11" data-semver="1.2.11" src="http://code.angularjs.org/1.2.11/angular-animate.min.js"></script>
 <script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
 
-
-
-
-<script src="../js/LogIn.js"></script>
 <script src="../js/app.js"></script>
+<script src="../js/LogIn.js"></script>
+<script src="../js/SignUp.js"></script>
+
+
 
 <link href="../styles/login.css" rel="stylesheet">
+
 
 <!-- Where all the magic happens -->
 <!-- LOGIN FORM -->
@@ -37,28 +38,26 @@
     <div class="logo">Login</div>
     <!-- Main Form -->
     <div class="login-form-1">
-        <form id="login-form" class="text-left">
+        <form id="login-form" class="text-center">
             <div class="login-form-main-message"></div>
             <div class="main-login-form">
                 <div class="login-group">
                     <div class="form-group">
                         <label for="lg_username" class="sr-only">Username</label>
-                        <input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="username" style="color: #009688">
+                        <input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="Username" style="color: #009688">
                     </div>
                     <div class="form-group">
                         <label for="lg_password" class="sr-only">Password</label>
-                        <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="password" style="color: #009688">
-                    </div>
-                    <div class="form-group login-group-checkbox">
-                        <input type="checkbox" id="lg_remember" name="lg_remember">
-                        <label for="lg_remember">remember</label>
+                        <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="Password" style="color: #009688">
                     </div>
                 </div>
-                <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+                <button ng-controller="LogInController" type="submit" class="login-button" ng-click="checkLogin()">
+                <span class="glyphicon glyphicon-menu-right"> </span>
+                </button>
             </div>
-            <div class="etc-login-form">
-                <p>forgot your password? <a href="#">click here</a></p>
-                <p>new user? <a ui-sref="singUp">create new account</a></p>
+            <div class="etc-login-form text-center">
+                <p>Forgot your password? <a href="#">Click here</a></p>
+                <p>New user? <a href="SingUp.html">Create new account</a></p>
             </div>
         </form>
     </div>
