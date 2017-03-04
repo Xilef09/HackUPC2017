@@ -4,7 +4,7 @@
 
 
 angular.module('myApp')
-    .controller('LogInController', ['$scope', '$location', 'checkLogin', function ($scope, $location, $mdDialog, checkLogin) {
+    .controller('LogInController', ['$scope', '$location', '$mdDialog', 'checkLogin' , function ($scope, $location, $mdDialog, checkLogin) {
 
         $scope.checkLogin = function () {
             var user = $("#lg_username").val();
@@ -20,11 +20,13 @@ angular.module('myApp')
         };
 
         $scope.items = [1, 2, 3];
+        var dialog = $mdDialog;
 
         $scope.showPrompt = function(ev) {
             // Appending dialog to document.body to cover sidenav in docs app
             var parentEl = angular.element(document.body);
-            $mdDialog.show({
+
+            dialog.show({
                 parent: parentEl,
                 targetEvent: $event,
                 template:
