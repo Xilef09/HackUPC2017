@@ -25,16 +25,7 @@ var app = angular.module('myApp')
                     //console.log(result[i].projectName);
                     var pname = result[i].projectName;
                     $scope.listaProj.push(pname);
-
-                    getProjects.getProjectTasks(result[i].projectName).then(function (issues) {
-                        var totalTime = 0;
-                        issues.forEach( function (elem) {
-                            totalTime += parseInt(elem.time);
-                        });
-                        console.log(totalTime);
-                        data.push({x : pname, y : totalTime});
-                        $scope.data = data;
-                    });
+                    data.push({x : pname, y : i+1});
                 }                
             }
         });
