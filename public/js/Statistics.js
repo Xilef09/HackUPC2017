@@ -1,33 +1,41 @@
 var app = angular.module('myApp')
-    .controller('StatisticsCtrl', ['$scope', 'restService',function($scope, restService) {
+    .controller('StatisticsCtrl', ['$scope', 'getProjects', function($scope, getProjects) {
 
-        $(document).ready(function(){
-            var response = restService.get("/project", {});
-            console.log("AQUI");
-            console.log(response);
-            console.log(response['$$state']);
-            response['$$state']['value'].forEach( function (elem){
-                console.log(elem);
-            });
-            var data = [];
+        $scope.listaProj = [];
+        var data = [];
+        //comprobar si los datos son correctos
+        getProjects.getProjects().then(function (result) {
+            //console.log(result);
+            if(result == undefined){
+                var alert = dialog.alert({
+                    title: 'Attention',
+                    textContent: 'This is an example of how easy dialogs can be!',
+                    ok: 'Close'
+                });
 
-            /*response.forEach(function (entry){
-                data.push({x : entry.projectName , y : entry.time});
-            });
-
-            $scope.data = [
-                {
-                    key: "Cumulative Return",
-                    values: data
-                }];*/
-
+                dialog
+                    .show( alert )
+                    .finally(function() {
+                        alert = undefined;
+                    });
+                //$mdDialog.show("Bad credentials, please stop write with your trunks");
+            }
+            else{
+                for(var i=0;i<result.length;++i){
+                    //console.log(result[i].projectName);
+                    $scope.listaProj.push(result[i].projectName);
+                    data.push({x : result[i].projectName, y : result[i].time});
+                }
+                //$scope.listaProj = result;
+            }
         });
+
+        $scope.data = data;
 
         $scope.optionsBar = {
             chart: {
-                type: 'discreteBarChart',
-                height: 400,
-                width : 700,
+                type: 'pieChart',
+                width: 750,
                 margin : {
                     top: 20,
                     right: 20,
@@ -38,11 +46,22 @@ var app = angular.module('myApp')
                 y: function(d){return d.y;},
                 showValues: true,
                 duration: 500,
-                yAxis: {
-                    axisLabel: 'Hours',
-                    axisLabelDistance: -10
-                }
+                showLabels: false
             }
+        };
+
+        $scope.select = function(proyecto){
+            console.log(proyecto);
+            getProjects.getProjectTasks(proyecto).then(function (result) {
+                var data = [];
+                result.forEach( function (elem) {
+                    if (elem.name.length > 40)
+                        data.push({x : elem.name.substring(0,40) + "...", y: elem.time});
+                    else
+                        data.push({x : elem.name, y: elem.time});
+                });
+                $scope.data = data;
+            });
         };
 
     }]);
