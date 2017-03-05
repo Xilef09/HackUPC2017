@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['nvd3'])
+var app = angular.module('myApp')
 
     .controller('StatisticsCtrl', function($scope) {
 
