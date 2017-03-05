@@ -1,10 +1,10 @@
 var app = angular.module('myApp')
-    .controller('StatisticsCtrl', ['$scope', 'restService', function($scope, restService) {
+    .controller('StatisticsCtrl', ['$scope', 'getProjects', function($scope, getProjects) {
 
         $scope.listaProj = [];
         var data = [];
         //comprobar si los datos son correctos
-        restService.get("/project").then(function (result) {
+        getProjects.getProjects().then(function (result) {
             //console.log(result);
             if(result == undefined){
                 var alert = dialog.alert({
@@ -30,17 +30,12 @@ var app = angular.module('myApp')
             }
         });
 
-        $scope.data = [
-            {
-                key: "Cumulative Return",
-                values: data
-            }];
+        $scope.data = data;
 
         $scope.optionsBar = {
             chart: {
-                type: 'discreteBarChart',
-                height: 400,
-                width : 700,
+                type: 'pieChart',
+                width: 750,
                 margin : {
                     top: 20,
                     right: 20,
@@ -51,23 +46,22 @@ var app = angular.module('myApp')
                 y: function(d){return d.y;},
                 showValues: true,
                 duration: 500,
-                yAxis: {
-                    axisLabel: 'Hours',
-                    axisLabelDistance: -10
-                }
+                showLabels: false
             }
         };
 
         $scope.select = function(proyecto){
             console.log(proyecto);
-            // Coger id del board
-            //if (proyecto == 'Trello 1') $scope.tareas = taskProj1;
-            //else if (proyecto == 'Trello 2') $scope.tareas = taskProj2;
-            //else if (proyecto == 'Jira1') $scope.tareas = taskProj3;
-
-            // Coger las tareas del board que estan asignadas a mi y añadirlas a tareas
-
-            $scope.selected = proyecto;
+            getProjects.getProjectTasks(proyecto).then(function (result) {
+                var data = [];
+                result.forEach( function (elem) {
+                    if (elem.name.length > 40)
+                        data.push({x : elem.name.substring(0,40) + "...", y: elem.time});
+                    else
+                        data.push({x : elem.name, y: elem.time});
+                });
+                $scope.data = data;
+            });
         };
 
     }]);
