@@ -18,7 +18,9 @@ function config($stateProvider, $urlRouterProvider) {
             controller  : 'project'
         })
         .state('graphics' , {
-            url : '/graphics'
+            url : '/graphics',
+            templateUrl : "Statistics.html",
+            controller  : 'StatisticsCtrl'
 
         })
         .state('syncWithTrello' , {

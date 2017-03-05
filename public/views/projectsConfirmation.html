@@ -1,18 +1,18 @@
 <div class="container">
     <div class="col-md-10">
         <p class="lead">Projects</p>
+        <small > click the projects you want to import</small>
             <!-- <a href="#" class="list-group-item list-group-item2">Trello Project1</a>
              <a href="#" class="list-group-item list-group-item2">Trello Project2</a>
              <a href="#" class="list-group-item list-group-item2">Jira Project1</a>-->
             <div id="mydiv" class="list-group">
                 <div ng-repeat="proyecto in listaProj">
-                    <div class="list-group-item list-group-item2" ng-click="select(proyecto)">
+                    <div class="list-group-item list-group-item2 tex" ng-click="save(proyecto)">
                         {{proyecto.name}}
-                        <input type="checkbox" style="left: 0px; float: right; position: relative" name="favorite1" value="chocolate" />
                     </div>
                 </div>
             </div>
-        <button>Importar</button>
+
     </div>
 
 </div>

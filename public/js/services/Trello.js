@@ -20,6 +20,7 @@ angular.module('myApp')
     .service('trelloService', [ function () {
         var trello = {};
         trello.boards = [];
+        trello.cards = [];
         trello.authorize = function () {
             var onAuthorize = function() {
                 updateLoggedIn();
@@ -62,6 +63,40 @@ angular.module('myApp')
                 });
                 //console.log(data);
 
+            });
+        };
+        trello.getCardOfBoards = function (id, callback) {
+
+            updateLoggedIn();
+            $("#result2").empty();
+
+            var data = [];
+
+            Trello.members.get("me", function(member){
+                $("#fullName").text(member.fullName);
+
+                var $cards = $("<div>")
+                    .text("Loading Cards...")
+                    .appendTo("#result2");
+
+
+                // Output a list of all of the cards that the member
+                // is assigned to
+                Trello.get("boards/" + id + "/cards", function(cards) {
+                    $cards.empty();
+                    $.each(cards, function (ix, card) {
+                        $("<a>")
+                            .attr({href: card.url, target: "trello"})
+                            .addClass("card")
+                            .text(card.name)
+                            .appendTo($cards);
+                        //console.log(card);
+                        data.push({id: card.id , name: card.name});
+
+                    });
+                    callback(data);
+                    angular.copy(data, trello.cards);
+                });
             });
         };
 

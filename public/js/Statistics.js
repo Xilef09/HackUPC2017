@@ -1,73 +1,67 @@
-var app = angular.module('myApp', ['nvd3'])
+var app = angular.module('myApp')
+    .controller('StatisticsCtrl', ['$scope', 'getProjects', function($scope, getProjects) {
 
-    .controller('StatisticsCtrl', function($scope) {
+        $scope.listaProj = [];
+        var data = [];
+        //comprobar si los datos son correctos
+        getProjects.getProjects().then(function (result) {
+            //console.log(result);
+            if(result == undefined){
+                var alert = dialog.alert({
+                    title: 'Attention',
+                    textContent: 'This is an example of how easy dialogs can be!',
+                    ok: 'Close'
+                });
 
+                dialog
+                    .show( alert )
+                    .finally(function() {
+                        alert = undefined;
+                    });
+                //$mdDialog.show("Bad credentials, please stop write with your trunks");
+            }
+            else{
+                for(var i=0;i<result.length;++i){
+                    //console.log(result[i].projectName);
+                    $scope.listaProj.push(result[i].projectName);
+                    data.push({x : result[i].projectName, y : result[i].time});
+                }
+                //$scope.listaProj = result;
+            }
+        });
 
-        $scope.options = {
+        $scope.data = data;
+
+        $scope.optionsBar = {
             chart: {
-                type: 'discreteBarChart',
-                height: 450,
+                type: 'pieChart',
+                width: 750,
                 margin : {
                     top: 20,
                     right: 20,
                     bottom: 50,
                     left: 55
                 },
-                x: function(d){return d.label;},
-                y: function(d){return d.value;},
+                x: function(d){return d.x;},
+                y: function(d){return d.y;},
                 showValues: true,
-                valueFormat: function(d){
-                    return d3.format(',.4f')(d);
-                },
                 duration: 500,
-                xAxis: {
-                    axisLabel: 'X Axis'
-                },
-                yAxis: {
-                    axisLabel: 'Y Axis',
-                    axisLabelDistance: -10
-                }
+                showLabels: false
             }
         };
 
-        $scope.data = [
-            {
-                key: "Cumulative Return",
-                values: [
-                    {
-                        "label" : "A" ,
-                        "value" : -29.765957771107
-                    } ,
-                    {
-                        "label" : "B" ,
-                        "value" : 0
-                    } ,
-                    {
-                        "label" : "C" ,
-                        "value" : 32.807804682612
-                    } ,
-                    {
-                        "label" : "D" ,
-                        "value" : 196.45946739256
-                    } ,
-                    {
-                        "label" : "E" ,
-                        "value" : 0.19434030906893
-                    } ,
-                    {
-                        "label" : "F" ,
-                        "value" : -98.079782601442
-                    } ,
-                    {
-                        "label" : "G" ,
-                        "value" : -13.925743130903
-                    } ,
-                    {
-                        "label" : "H" ,
-                        "value" : -5.1387322875705
-                    }
-                ]
-            }
-        ];
+        $scope.select = function(proyecto){
+            console.log(proyecto);
+            getProjects.getProjectTasks(proyecto).then(function (result) {
+                var data = [];
+                result.forEach( function (elem) {
+                    if (elem.name.length > 40)
+                        data.push({x : elem.name.substring(0,40) + "...", y: elem.time});
+                    else
+                        data.push({x : elem.name, y: elem.time});
+                });
+                $scope.data = data;
+            });
+        };
 
-    });
+    }]);

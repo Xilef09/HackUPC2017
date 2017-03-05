@@ -22,11 +22,11 @@
 
     </div>
     <div class="col-md-7">
-        <p class="lead"> Total hours worked on this project: 36! {{selected}}</p>
+        <p class="lead"> {{selected}}</p>
         <div class="list-group list-group2">
             <div ng-repeat="task in tareas">
-                <div class="list-group-item" ng-click="addHours()">
-                    {{task}}
+                <div class="list-group-item" ng-click="addHours(task)">
+                    {{task.name}}
                 </div>
             </div>
         </div>
