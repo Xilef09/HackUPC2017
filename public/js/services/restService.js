@@ -6,6 +6,8 @@
 angular.module('myApp')
     .service('restService', ['MY_CONSTANTS', '$http' , function (MY_CONSTANTS, $http) {
         this.get = function (url, params) {
+            var token = window.localStorage.getItem("token");
+            if (token != undefined) $http.defaults.headers.common.Authorization = token;
             return $http.get(MY_CONSTANTS.SERVER_IP + url, params)
                 .then(function successCallback(response) {
                     if (params != null) {
@@ -20,6 +22,8 @@ angular.module('myApp')
                 });
         };
         this.post = function (url, data) {
+            var token = window.localStorage.getItem("token");
+            if (token != undefined) $http.defaults.headers.common.Authorization = token;
             return $http.post(MY_CONSTANTS.SERVER_IP + url, data)
                 .then(function successCallback(response) {
                     console.log(response);
