@@ -22,5 +22,14 @@ angular.module('myApp')
                 'time' : time
             };
             return restService.post('/issue', body);
-        }
+        };
+        this.updateCardOfProject = function (name, description, time, projectName, id) {
+            var body={
+                'name' : name,
+                'description' : description,
+                'project' : projectName,
+                'time' : time
+            };
+            return restService.post('/issue/' + id, body);
+        };
     }]);

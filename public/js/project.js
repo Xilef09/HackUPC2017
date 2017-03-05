@@ -69,7 +69,7 @@ angular.module('myApp')
         dialog
             .show(confirm).then(function (result) {
                 $scope.status =  result;
-                putProjects2.putCardsOfProject(task.name , "", $scope.status, $scope.selected);
+                putProjects2.updateCardOfProject(task.name , "", $scope.status, $scope.selected, task._id);
             })
             .finally(function() {
                 alert = undefined;
