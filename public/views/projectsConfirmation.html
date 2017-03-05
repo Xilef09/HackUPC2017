@@ -5,7 +5,12 @@
              <a href="#" class="list-group-item list-group-item2">Trello Project2</a>
              <a href="#" class="list-group-item list-group-item2">Jira Project1</a>-->
             <div id="mydiv" class="list-group">
-                
+                <div ng-repeat="proyecto in listaProj">
+                    <div class="list-group-item list-group-item2" ng-click="select(proyecto)">
+                        {{proyecto.name}}
+                        <input type="checkbox" style="left: 0px; float: right; position: relative" name="favorite1" value="chocolate" />
+                    </div>
+                </div>
             </div>
         <button>Importar</button>
     </div>

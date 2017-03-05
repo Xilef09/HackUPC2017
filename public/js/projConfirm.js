@@ -10,14 +10,14 @@ angular.module('myApp')
 
         var callback = function (result) {
             console.log(result);
-            var a = result;
-            for (var i in a) {
-                console.log(i);
+            console.log(result[0]);
+            result.forEach(function (k, v, arr) {
                 document.getElementById('mydiv').innerHTML +=
-                    "<div class='list-group-item list-group-item2' ng-click='select(proyecto)'>" + i[0].name +
+                    "<div class='list-group-item list-group-item2' ng-click='select(proyecto)'>" + k.name +
                     " <input type='checkbox' style='left: 0px; float: right; position: relative' name='favorite1' value='chocolate' />" +
-                "</div>";
-            }
+                    "</div>";
+            });
+
 
 
         };

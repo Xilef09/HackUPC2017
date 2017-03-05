@@ -57,10 +57,11 @@ angular.module('myApp')
 
                         data.push({id: board.id , name: board.name});
                     });
+                    callback(data);
+                    angular.copy(data, trello.boards);
                 });
                 //console.log(data);
-                callback(data);
-                angular.copy(data, trello.boards);
+
             });
         };
 
