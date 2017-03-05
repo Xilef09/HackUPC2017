@@ -1,6 +1,9 @@
-var app = angular.module('myApp', ['nvd3'])
+var app = angular.module('myApp')
+    .controller('StatisticsCtrl', ['$scope', 'restService',function($scope, restService) {
 
-    .controller('StatisticsCtrl', function($scope) {
+        $(document).ready(function(){
+            console.log(restService.get("/project", {}));
+        });
 
 
         $scope.options = {
@@ -70,4 +73,4 @@ var app = angular.module('myApp', ['nvd3'])
             }
         ];
 
-    });
+    }]);

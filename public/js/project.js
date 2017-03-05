@@ -4,9 +4,11 @@
 
 angular.module('myApp')
     .controller('project', ['$scope', '$location', 'getProjects','putProjects', '$mdDialog', function ($scope, $location, getProjects, putProjects, $mdDialog){
-    $scope.getProjects = function () {
+
+        $scope.listaProj = [];
         //comprobar si los datos son correctos
-        getProjects.getProjects(token).then(function (result) {
+        getProjects.getProjects().then(function (result) {
+            //console.log(result);
             if(result == undefined){
                 var alert = dialog.alert({
                     title: 'Attention',
@@ -22,16 +24,17 @@ angular.module('myApp')
                 //$mdDialog.show("Bad credentials, please stop write with your trunks");
             }
             else{
-                for(var i=0;i<result.size();++i){
-                    $scope.listaProj.append(result[i].name);
+                for(var i=0;i<result.length;++i){
+                    //console.log(result[i].projectName);
+                    $scope.listaProj.push(result[i].projectName);
                 }
                 //$scope.listaProj = result;
             }
         });
-    };
+
         $scope.putProjects = function () {
             //comprobar si los datos son correctos
-            putProjects.putProjects(token, projectName, programRef).then(function (result) {
+            putProjects.putProjects(projectName, programRef).then(function (result) {
                 if(result == undefined){
                     var alert = dialog.alert({
                         title: 'Attention',
@@ -53,20 +56,23 @@ angular.module('myApp')
             });
         };
 
+        /*
         $scope.listaProj = ["Trello 1", "Trello 2", "Jira1"];
     var taskProj1 = ['a', 'b', 'c'];
     var taskProj2 = ['a', 'b', 'c', 'd'];
     var taskProj3 = ['a'];
+    */
 
-    console.log(window.localStorage.getItem("token"));
-        $scope.status = '';
-    $scope.tareas = {"frontend": "3h","backend": "4h","midendKappa": "7h"};
+    //console.log(window.localStorage.getItem("token"));
+      //  $scope.status = '';
+    //$scope.tareas = {"frontend": "3h","backend": "4h","midendKappa": "7h"};
 
     $scope.select = function(proyecto){
+        console.log("hi");
         // Coger id del board
-        if (proyecto == 'Trello 1') $scope.tareas = taskProj1;
-        else if (proyecto == 'Trello 2') $scope.tareas = taskProj2;
-        else if (proyecto == 'Jira1') $scope.tareas = taskProj3;
+        //if (proyecto == 'Trello 1') $scope.tareas = taskProj1;
+        //else if (proyecto == 'Trello 2') $scope.tareas = taskProj2;
+        //else if (proyecto == 'Jira1') $scope.tareas = taskProj3;
 
         // Coger las tareas del board que estan asignadas a mi y añadirlas a tareas
 
@@ -95,4 +101,5 @@ angular.module('myApp')
             });
 
     }
+
 }]);

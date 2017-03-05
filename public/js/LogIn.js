@@ -5,8 +5,8 @@
 
 angular.module('myApp')
     .controller('LogInController', ['$scope', '$location', 'checkLogin', '$mdDialog', function ($scope, $location, checkLogin, $mdDialog) {
-        console.log("Hi");
-        console.log($mdDialog);
+        //console.log("Hi");
+        //console.log($mdDialog);
         $scope.customFullscreen = false;
         $scope.checkLogin = function () {
             var user = $("#lg_username").val();
@@ -14,7 +14,7 @@ angular.module('myApp')
             var dialog = $mdDialog;
             //comprobar si los datos son correctos
             checkLogin.checkLogin(user, password).then(function (result) {
-                console.log(result);
+                //console.log(result);
                 if(result == undefined || result == "Error getting data"){
                     var alert = dialog.alert({
                         title: 'Attention',

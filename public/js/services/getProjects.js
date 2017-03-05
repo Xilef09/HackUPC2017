@@ -7,10 +7,7 @@
 
 angular.module('myApp')
     .service('getProjects', ['restService' , function (restService) {
-        this.getProjects = function (token) {
-            var header = {
-                'token' : token
-            };
-            return restService.get('/project', header);
+        this.getProjects = function () {
+            return restService.get('/project');
         };
     }]);

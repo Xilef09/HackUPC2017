@@ -14,10 +14,21 @@ angular.module('myApp')
 
         trelloService.getBoards(callback);
 
+        var putProjects2 = putProjects;
+        var callback2 = function (id, name) {
+            var callback3 = function (response) {
+                //console.log(response);
+                for (var i in response) {
+                    putProjects2.putCardsOfProject(i.name , "", 0, name);
+                }
+            };
+            trelloService.getCardOfBoards(id, callback3);
+        };
+
         $scope.save = function (proyecto) {
             console.log(proyecto);
-            putProjects.putProjects()
-
+            putProjects.putProjects(proyecto.name, "Trello");
+            callback2(proyecto.id, proyecto.name)
         }
 
     }]);
