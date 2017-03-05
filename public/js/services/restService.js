@@ -10,11 +10,11 @@ angular.module('myApp')
             if (token != undefined) $http.defaults.headers.common.Authorization = token;
             return $http.get(MY_CONSTANTS.SERVER_IP + url, params)
                 .then(function successCallback(response) {
-                    if (params != null) {
+                    //if (params != null) {
+                    if(response['data']['msg'] != undefined) {
                         return response['data']['msg']['data'];
                     }
                     else {
-                        console.log(response);
                         return response['data']['result'];
                     }
 
@@ -27,7 +27,6 @@ angular.module('myApp')
             if (token != undefined) $http.defaults.headers.common.Authorization = token;
             return $http.post(MY_CONSTANTS.SERVER_IP + url, data)
                 .then(function successCallback(response) {
-                    console.log(response);
                     if(response['data']['msg'] != undefined) {
                         if(response['data']['msg']['data'] != undefined) {
                             return response['data']['msg']['data'];

@@ -10,4 +10,10 @@ angular.module('myApp')
         this.getProjects = function () {
             return restService.get('/project');
         };
+        this.getProjectTasks = function (projectName) {
+            var params={
+                'project' : projectName
+            };
+            return restService.get('/issue/' + projectName, params);
+        };
     }]);

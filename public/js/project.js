@@ -32,43 +32,17 @@ angular.module('myApp')
             }
         });
 
-        $scope.putProjects = function () {
-            //comprobar si los datos son correctos
-            putProjects.putProjects(projectName, programRef).then(function (result) {
-                if(result == undefined){
-                    var alert = dialog.alert({
-                        title: 'Attention',
-                        textContent: 'This is an example of how easy dialogs can be!',
-                        ok: 'Close'
-                    });
+        var getProjects2 = getProjects;
+        console.log(getProjects);
 
-                    dialog
-                        .show( alert )
-                        .finally(function() {
-                            alert = undefined;
-                        });
-                    //$mdDialog.show("Bad credentials, please stop write with your trunks");
-                }
-                else{
-                    //$scope.getProjects();
-                    //$scope.listaProj = result;
-                }
-            });
-        };
-
-        /*
-        $scope.listaProj = ["Trello 1", "Trello 2", "Jira1"];
-    var taskProj1 = ['a', 'b', 'c'];
-    var taskProj2 = ['a', 'b', 'c', 'd'];
-    var taskProj3 = ['a'];
-    */
-
-    //console.log(window.localStorage.getItem("token"));
-      //  $scope.status = '';
-    //$scope.tareas = {"frontend": "3h","backend": "4h","midendKappa": "7h"};
 
     $scope.select = function(proyecto){
-        console.log("hi");
+        console.log(getProjects2);
+        var data = [];
+        getProjects2.getProjectTasks(proyecto).then(function (result) {
+            $scope.tareas = result;
+        });
+
         // Coger id del board
         //if (proyecto == 'Trello 1') $scope.tareas = taskProj1;
         //else if (proyecto == 'Trello 2') $scope.tareas = taskProj2;
