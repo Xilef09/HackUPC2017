@@ -8,15 +8,9 @@
 angular.module('myApp')
     .service('putProjects', ['restService' , function (restService) {
         this.putProjects = function (token, projectName, programRef) {
-            var data = {
-                header:{
-                    'token' : token
-                },
-                body:{
-                    'projectName' : projectName,
-                    'programRef' : programRef
-                }
+            var body={
+                    'projectName' : projectName
             }
-            return restService.get('/project', data);
+            return restService.get('/project', body);
         };
     }]);

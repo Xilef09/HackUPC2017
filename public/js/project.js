@@ -6,7 +6,7 @@ angular.module('myApp')
     .controller('project', ['$scope', '$location', 'getProjects','putProjects', '$mdDialog', function ($scope, $location, getProjects, putProjects, $mdDialog){
     $scope.getProjects = function () {
         //comprobar si los datos son correctos
-        getProjects.getProjects(token).then(function (result) {
+        getProjects.getProjects().then(function (result) {
             if(result == undefined){
                 var alert = dialog.alert({
                     title: 'Attention',
@@ -31,7 +31,7 @@ angular.module('myApp')
     };
         $scope.putProjects = function () {
             //comprobar si los datos son correctos
-            putProjects.putProjects(token, projectName, programRef).then(function (result) {
+            putProjects.putProjects(projectName, programRef).then(function (result) {
                 if(result == undefined){
                     var alert = dialog.alert({
                         title: 'Attention',
@@ -95,4 +95,5 @@ angular.module('myApp')
             });
 
     }
+
 }]);
