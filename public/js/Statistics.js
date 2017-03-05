@@ -24,13 +24,21 @@ var app = angular.module('myApp')
                 for(var i=0;i<result.length;++i){
                     //console.log(result[i].projectName);
                     $scope.listaProj.push(result[i].projectName);
-                    data.push({x : result[i].projectName, y : result[i].time});
-                }
-                //$scope.listaProj = result;
+
+                    getProjects.getProjectTasks(result[i].projectName).then(function (result) {
+                        var data = [];
+                        var totalTime = 0;
+                        result.forEach( function (elem) {
+                            totalTime += parseInt(elem.time);
+                        });
+                        console.log(totalTime);
+                        data.push({x : result[i].projectName, y : totalTime});
+                        $scope.data = data;
+                    });
+                }                
             }
         });
 
-        $scope.data = data;
 
         $scope.optionsBar = {
             chart: {
