@@ -30,8 +30,7 @@ angular.module('myApp')
                 }
                 else {
                     //$location.path('../views/projectsView.html');
-                    
-                    window.uiSref = mainView;
+                    window.location.href = 'projectsView.html';
                     window.localStorage.setItem("token", result);
                 }
             });
