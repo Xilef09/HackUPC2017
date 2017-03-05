@@ -17,9 +17,11 @@ angular.module('myApp')
         var putProjects2 = putProjects;
         var callback2 = function (id, name) {
             var callback3 = function (response) {
-                //console.log(response);
-                for (var i in response) {
-                    putProjects2.putCardsOfProject(i.name , "", 0, name);
+                console.log("The response");
+                console.log(response);
+                var i;
+                for (i in response) {
+                    putProjects2.putCardsOfProject(response[i].name , "", 0, name);
                 }
             };
             trelloService.getCardOfBoards(id, callback3);

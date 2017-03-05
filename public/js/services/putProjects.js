@@ -18,7 +18,7 @@ angular.module('myApp')
             var body={
                 'name' : name,
                 'description' : description,
-                'projectName' : projectName,
+                'project' : projectName,
                 'time' : time
             };
             return restService.post('/issue', body);
