@@ -23,21 +23,23 @@ var app = angular.module('myApp')
             else{
                 for(var i=0;i<result.length;++i){
                     //console.log(result[i].projectName);
-                    $scope.listaProj.push(result[i].projectName);
+                    var pname = result[i].projectName;
+                    $scope.listaProj.push(pname);
 
-                    getProjects.getProjectTasks(result[i].projectName).then(function (result) {
-                        var data = [];
+                    getProjects.getProjectTasks(result[i].projectName).then(function (issues) {
                         var totalTime = 0;
-                        result.forEach( function (elem) {
+                        issues.forEach( function (elem) {
                             totalTime += parseInt(elem.time);
                         });
                         console.log(totalTime);
-                        data.push({x : result[i].projectName, y : totalTime});
+                        data.push({x : pname, y : totalTime});
                         $scope.data = data;
                     });
                 }                
             }
         });
+
+        $scope.data = data;
 
 
         $scope.optionsBar = {
