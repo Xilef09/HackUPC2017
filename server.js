@@ -80,7 +80,7 @@ var apiRoutes = express.Router();
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, skip, limit");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, skip, limit, Authorization");
     next();
 });
 
@@ -290,6 +290,7 @@ apiRoutes.post('/issue', function(req, res) {
             if (!user) {
                 return res.status(403).send({success: false, msg: 'Authentication failed.'});
             } else {
+                console.log("start.Issue.newIssue: " + " " + req.body.name + " " + req.body.description + " " + req.body.time + " " + req.body.project + " " + decoded.name);
                 var newIssue= new Issue({
                     name: req.body.name,
                     description: req.body.description,
