@@ -53,8 +53,9 @@ angular.module('myApp')
         $scope.selected = proyecto;
     };
 
-    $scope.addHours = function () {
-        console.log("HI");
+    var putProjects2 = putProjects;
+    $scope.addHours = function (task) {
+        console.log(task);
         var hours;
         $scope.customFullscreen = false;
         var dialog = $mdDialog;
@@ -68,7 +69,7 @@ angular.module('myApp')
         dialog
             .show(confirm).then(function (result) {
                 $scope.status =  result;
-                console.log($scope.status);
+                putProjects2.putCardsOfProject(task.name , "", $scope.status, $scope.selected);
             })
             .finally(function() {
                 alert = undefined;
