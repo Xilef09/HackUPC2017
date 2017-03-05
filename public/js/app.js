@@ -11,6 +11,7 @@ function config($stateProvider, $urlRouterProvider) {
     //['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 
 
+    $urlRouterProvider.otherwise('/mainView');
     $stateProvider
         .state('mainView' , {
             url : '/mainView',
