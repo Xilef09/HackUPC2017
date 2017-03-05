@@ -7,10 +7,24 @@ angular.module('myApp')
 
         trelloService.authorize();
 
-        trelloService.getBoards();
+
+        var callback = function (result) {
+            console.log(result);
+            var a = result;
+            for (var i in a) {
+                console.log(i);
+                document.getElementById('mydiv').innerHTML +=
+                    "<div class='list-group-item list-group-item2' ng-click='select(proyecto)'>" + i[0].name +
+                    " <input type='checkbox' style='left: 0px; float: right; position: relative' name='favorite1' value='chocolate' />" +
+                "</div>";
+            }
 
 
-        $scope.listaProj = trelloService.boards;
+        };
+
+        trelloService.getBoards(callback);
+
+
 
 
         var taskProj1 = ['a', 'b', 'c'];

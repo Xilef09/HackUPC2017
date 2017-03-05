@@ -32,7 +32,7 @@ angular.module('myApp')
                 scope: { write: true, read: true }
             });
         };
-        trello.getBoards = function () {
+        trello.getBoards = function (callback) {
             updateLoggedIn();
             $("#result").empty();
             var data = [];
@@ -58,7 +58,8 @@ angular.module('myApp')
                         data.push({id: board.id , name: board.name});
                     });
                 });
-                console.log(data);
+                //console.log(data);
+                callback(data);
                 angular.copy(data, trello.boards);
             });
         };
