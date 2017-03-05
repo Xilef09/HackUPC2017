@@ -39,22 +39,18 @@ angular.module('myApp')
                     var fullname = $("#reg_fullname").val();
                     var dialog = $mdDialog;
                     signUpService.signUpService(username, password, email, fullname).then(function (result) {
-                        if(result == undefined){
-                            var alert = dialog.alert({
-                                title: 'Username Exists',
-                                textContent: 'The username already exists, please sign up with other username',
-                                ok: 'Accept'
-                            });
+                        var alert = dialog.alert({
+                            title: 'Info',
+                            textContent: result,
+                            ok: 'Accept'
+                        });
+                        dialog.show( alert ).finally(function() {
+                            alert = undefined;
+                            if (result == 'Successful created new user.')
+                                window.location.href = "index.html";
+                         });
 
-                            dialog
-                                .show( alert )
-                                .finally(function() {
-                                    alert = undefined;
-                                });
-                        }
                     });
-
-
                 }
             });
         };
