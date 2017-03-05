@@ -12,18 +12,18 @@
 
 <body ng-controller="StatisticsCtrl">
 
-    <div class="col-md-3">
-        <p class="lead">Projects</p>
-        <div>
-            <div class="list-group">
-                <div ng-repeat="proyecto in listaProj">
-                    <button class="list-group-item list-group-item2" ng-click="select(proyecto)">
-                        {{proyecto}}
-                    </button>
-                </div>
+<div class="col-md-3" >
+    <p class="lead">Projects</p>
+    <div>
+        <div class="list-group">
+            <div ng-repeat="proyecto in listaProj">
+                <button class="list-group-item list-group-item2" ng-click="select(proyecto)">
+                    {{proyecto}}
+                </button>
             </div>
         </div>
     </div>
+</div>
 
     <div class="plot">
         <nvd3 options="optionsBar" data="data"></nvd3>
