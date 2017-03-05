@@ -192,10 +192,30 @@ apiRoutes.get('/project', function(req, res) {
             if (!user) {
                 return res.status(403).send({success: false, msg: 'Authentication failed.'});
             } else {
+
                 Project.find({ userRef: decoded.name}, {__v: 0}, function (err, projects) {
                     if (err) throw err;
-                    res.json({success: 200, result: projects});
+                    projects.forEach(function (k, v, arr) {
+                        Project.findOne({ _id : v._id}, function (err, project) {
+                            if (err) throw err;
+                            var totalTime = 0;
+                            Issue.find({projectName: v._id}, function (err, issues) {
+                               issues.forEach(function (k, v, arr) {
+                                   totalTime =+ v.time;
+                               });
+                                project.set('time', totalTime);
+                                project.save();
+
+                            });
+                        });
+                    });
+                    Project.find({ userRef: decoded.name}, {__v: 0}, function (err, projs) {
+                        res.json({success: 200, result: projects});
+                    });
+
                 });
+
+
             }
         });
     } else {
@@ -215,9 +235,19 @@ apiRoutes.get('/project/:id', function(req, res) {
             if (!user) {
                 return res.status(403).send({success: false, msg: 'Authentication failed.'});
             } else {
-                Project.find({ userRef: decoded.name, _id: req.params.id}, {__v: 0}, function (err, projects) {
+                Project.findOne({ userRef: decoded.name, _id: req.params.id}, {__v: 0}, function (err, project) {
                     if (err) throw err;
-                    res.json({success: 200, result: projects});
+                    var totalTime = 0;
+                    Issue.find({projectName: project._id}, function (err, issues) {
+                        issues.forEach(function (k, v, arr) {
+                            totalTime =+ v.time;
+                        });
+                        project.set('time', totalTime);
+                        project.save();
+                    });
+                    Project.findOne({ userRef: decoded.name, _id: req.params.id}, {__v: 0}, function (err, proj) {
+                        res.json({success: 200, result: proj});
+                    });
                 });
             }
         });
